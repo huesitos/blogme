@@ -4,6 +4,7 @@ RSpec.describe PostsController, type: :controller do
   before(:context) { @post = create(:post) }
 
   describe "GET index" do
+    render_views
 
     it "assigns @posts" do
       get :index
@@ -22,6 +23,8 @@ RSpec.describe PostsController, type: :controller do
 
     it "renders the index template" do
       get :index
+
+      expect(assigns(:posts)).to be_truthy
       expect(response).to render_template("index")
       expect(response).to have_http_status(:ok)
     end

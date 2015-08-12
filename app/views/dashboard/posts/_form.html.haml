@@ -1,9 +1,12 @@
-= form_for @post do |f|
+= form_for @post, url: dashboard_posts_path do |f|
   .field
     = f.label :title
     = f.text_field :title
   .field
     = f.label :description
     = f.text_area :description
+  .field
+    = label_tag :tags, 'Tags'
+    = text_field_tag :tags
   .field
     = f.submit 'Create'
