@@ -2,3 +2,6 @@
   %h2= @post.title
   %p= @post.created_at.to_time.strftime("%y %^b %d %H:%M:%S")
   %p= @post.description
+  %ul
+  - @post.tags.each do |tag|
+    %li=tag.name

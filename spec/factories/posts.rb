@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :post do
-    title Faker::Lorem.characters(150)
+    title Faker::Lorem.sentence(10)
     description Faker::Lorem.paragraph(5)
   end
 

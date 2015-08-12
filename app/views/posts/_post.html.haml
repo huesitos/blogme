@@ -4,4 +4,7 @@
   %p=post.title
   %h3 Description
   %p=post.description.split.slice(0, 10).join(" ")+'...'
+  %ul
+  - post.tags.each do |tag|
+    %li=tag.name
   = link_to 'Show', post_path(post.id)

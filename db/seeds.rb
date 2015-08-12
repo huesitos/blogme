@@ -5,5 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Post.destroy_all
+Tag.destroy_all
 
-Post.create([{title: Faker::Lorem.sentence, description: Faker::Lorem.paragraph}, {title: Faker::Lorem.sentence, description: Faker::Lorem.paragraph}])
+tag1 = FactoryGirl.create(:tag, name: 'cooking')
+tag2 = FactoryGirl.create(:tag, name: 'sports')
+tag3 = FactoryGirl.create(:tag, name: 'health')
+tag4 = FactoryGirl.create(:tag, name: 'life')
+
+FactoryGirl.create(:post).tags << [tag1, tag2]
+FactoryGirl.create(:post).tags << [tag3, tag4]
+FactoryGirl.create(:post).tags << [tag2, tag3]
