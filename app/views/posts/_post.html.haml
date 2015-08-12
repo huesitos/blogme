@@ -2,4 +2,4 @@
   %h3 Title
   %p=post.title
   %h3 Description
-  %p=post.description
+  %p=post.description.split.slice(0, 10).join(" ")+'...'
