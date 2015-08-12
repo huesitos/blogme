@@ -17,11 +17,11 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
   end
 
-  config.before(:each) do
+  config.before(:context) do
     DatabaseCleaner.start
   end
 
-  config.after(:each) do
+  config.after(:context) do
     DatabaseCleaner.clean
   end
 end
