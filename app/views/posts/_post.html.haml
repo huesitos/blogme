@@ -1,4 +1,5 @@
 .post
+  %p=post.created_at.to_date.strftime("%y %^b %d")
   %h3 Title
   %p=post.title
   %h3 Description
