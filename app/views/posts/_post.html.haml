@@ -3,3 +3,4 @@
   %p=post.title
   %h3 Description
   %p=post.description.split.slice(0, 10).join(" ")+'...'
+  = link_to 'Show', post_path(post.id)
