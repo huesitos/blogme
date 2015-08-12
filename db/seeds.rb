@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Post.create([{title: Faker::Lorem.sentence, description: Faker::Lorem.paragraph}, {title: Faker::Lorem.sentence, description: Faker::Lorem.paragraph}])
