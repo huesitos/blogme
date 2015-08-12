@@ -1,3 +1,3 @@
-== Blogging
+== Blogme
 
 Small blog app.
