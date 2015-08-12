@@ -14,7 +14,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
 
       it "renders a form with field title and description" do
-        expect(response.body.include? "<form class='new_post' id='new_post' action='/dashboard/posts' method='post'")
+        expect(response.body).to include("<form class='new_post' id='new_post' action='/dashboard/posts' method='post'")
         expect(response.body).to include("Title")
         expect(response.body).to include("Description")
         expect(response.body).to include("Tags")
@@ -107,16 +107,22 @@ RSpec.describe Dashboard::PostsController, type: :controller do
   end
 
   context "shows existing posts" do
+    before(:context) { create_list(:post, 2) }
 
     describe "GET index" do
 
-      fit "displays all posts" do
-        opost = create(:post)
+      it "displays all posts" do
         get :index
 
         expect(assigns(:posts)).to be_truthy
-        expect(assigns(:posts)).to include(opost)
+        expect(assigns(:posts)).to include(Post.first)
         expect(response).to render_template(:index)
+      end
+
+      fit "displays posts with an edit and delete link" do
+        get :index
+
+        expect(response.body).to include("<a href=\"/dashboard/posts/#{Post.first.id}/edit\">")
       end
     end
   end

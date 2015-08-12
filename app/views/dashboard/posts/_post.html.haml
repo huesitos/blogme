@@ -1,0 +1,7 @@
+.post
+  %p=post.created_at.to_date.strftime("%y %^b %d")
+  %h3 Title
+  %p=post.title
+  %p=post.description.split.slice(0, 10).join(" ")+'...'
+  = link_to 'Edit', edit_dashboard_post_path(post.id)
+  = link_to 'Destroy', dashboard_post_path(post.id), method: 'delete'
