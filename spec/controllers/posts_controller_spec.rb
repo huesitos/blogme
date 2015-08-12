@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-    before(:context) { @post = create(:post) }
+  before(:context) { @post = create(:post) }
 
   describe "GET index" do
 
