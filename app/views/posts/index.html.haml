@@ -1,3 +1,8 @@
 %h2 Posts
 
 = render @posts
+%ul
+  - @tags_with_frequency.each do |tag_f|
+    =render tag_f[0]
+    %span=tag_f[1]
+
