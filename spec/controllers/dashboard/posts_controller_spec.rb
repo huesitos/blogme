@@ -225,7 +225,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
     describe "DELETE destroy" do
       let(:post) { create(:post) }
 
-      fit "destroy an existing post" do
+      it "destroy an existing post" do
         delete :destroy, id: post.id
 
         expect(Post.all.length).to eq 0
