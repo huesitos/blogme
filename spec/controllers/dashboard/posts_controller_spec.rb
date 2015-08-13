@@ -95,13 +95,13 @@ RSpec.describe Dashboard::PostsController, type: :controller do
 
           expect(@post.errors.full_messages.length). to eq 2
           expect(@post.errors.full_messages).to include(
-            "Title can't be blank", 
+            "Title can't be blank",
             "Description can't be blank")
         end
 
         it "post's title length is <= 100" do
           post :create, :post => {
-            title: Faker::Lorem.characters(101), 
+            title: Faker::Lorem.characters(101),
             description: Faker::Lorem.paragraph}
           @post = assigns(:post)
 
@@ -155,7 +155,61 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
     end
 
-    describe "PATCH update"
+    describe "PATCH update" do
+        before(:each) do
+        @post = create(:post)
+        @tag = create(:tag, name: "health")
+        @post.tags << @tag
+
+        @new_values = {
+          title: Faker::Lorem.sentence(5),
+          description: Faker::Lorem.paragraph
+        }
+      end
+
+      it "updates an existing post" do
+        patch :update, id: @post.id, post: @new_values
+
+        expect(upost.title).to eq new_values[:title]
+        expect(upost.description).to eq new_values[:description]
+      end
+
+      context "when tags are edited" do
+
+        it "removes all tags" do
+          patch :update, id: @post.id, post: @new_values, tags: ''
+          upost = assigns(:post)
+
+          expect(upost.tags.length).to eq 0
+          expect(@tag.posts.length).to eq 0
+        end
+
+        it "changes the tags" do
+          expect(Tag.find_by(name: 'health').posts.length).to eq 1
+
+          patch :update, id: @post.id, post: @new_values, tags: 'desserts'
+          upost = assigns(:post)
+
+          expect(upost.tags.length).to eq 1
+          expect(upost.tags.first.name).to eq "desserts"
+          expect(Tag.find_by(name: 'health').posts.length).to eq 0
+        end
+      end
+
+      context "responds by" do
+
+        it "redirecting to index template when sucessful" do
+          expect(response).to redirect_to('/dashboard/posts')
+          expect(response.status).to eq 302
+        end
+
+        it "rendering the edit template when unsuccessful" do
+          post :update, :post => {title: '', description: ''}
+
+          expect(response).to render_template(:edit)
+        end
+      end
+    end
 
   context "destroys existing post"
 
