@@ -76,7 +76,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       describe "responds by" do
 
         it "redirecting to index template when sucessful" do
-          expect(response).to redirect_to('/dashboard/posts')
+          expect(response).to redirect_to(:dashboard_posts)
           expect(response.status).to eq 302
         end
 
@@ -155,7 +155,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
     end
 
-    fdescribe "PATCH update" do
+    describe "PATCH update" do
       before(:each) do
         @post = create(:post)
         @tag = create(:tag, name: "health")
@@ -220,11 +220,21 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
     end
 
-  context "destroys existing post"
+  describe "destroys existing post"
 
     describe "DELETE destroy" do
+      let(:post) { create(:post) }
 
-      it "destroy an existing post"
-      it "redirects to the index template"
+      fit "destroy an existing post" do
+        delete :destroy, id: post.id
+
+        expect(Post.all.length).to eq 0
+      end
+
+      it "redirects to the index template" do
+        delete :destroy, id: post.id
+
+        expect(response).to redirect_to(:dashboard_posts)
+      end
     end
   end
