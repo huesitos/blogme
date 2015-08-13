@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe TagsController, type: :controller do
-  before(:context) do
+  before(:each) do
     @tag = create(:tag, name: "cooking")
     @post = create(:post)
     @tag.posts << @post

@@ -5,12 +5,12 @@ RSpec.describe Dashboard::PostsController, type: :controller do
 
   shared_examples_for "form template" do |name, view, extra|
 
-    fit "renders the #{name} template" do
+    it "renders the #{name} template" do
       expect(response).to render_template(view)
       expect(response.status).to eq(200)
     end
 
-    fit "renders a form with field title, description, and tags" do
+    it "renders a form with field title, description, and tags" do
       expect(response.body).to include("class=\"#{name}_post\"")
       expect(response.body).to include("Title")
       expect(response.body).to include("Description")
@@ -18,7 +18,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
     end
   end
 
-  context "when creating new posts" do
+  describe "creates new posts" do
 
     describe "GET new" do
       before(:each) { get :new }
@@ -51,7 +51,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
 
       context "when tags exist" do
 
-        before(:context) do
+        before(:each) do
           @cooking = create(:tag, name: 'cooking')
           @cooking.posts << create(:post)
 
@@ -73,7 +73,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
         end
       end
 
-      context "responds by" do
+      describe "responds by" do
 
         it "redirecting to index template when sucessful" do
           expect(response).to redirect_to('/dashboard/posts')
@@ -87,7 +87,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
         end
       end
 
-      context "validates" do
+      describe "validates" do
 
         it "post's title and description must be present" do
           post :create, :post => {title: '', description: ''}
@@ -113,8 +113,8 @@ RSpec.describe Dashboard::PostsController, type: :controller do
     end
   end
 
-  context "shows existing posts" do
-    before(:context) { create_list(:post, 2) }
+  describe "shows existing posts" do
+    before(:each) { create_list(:post, 2) }
 
     describe "GET index" do
 
@@ -135,7 +135,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
     end
   end
 
-  context "updates existing posts"
+  describe "updates existing posts"
 
     describe "GET edit" do
       before(:each) do
@@ -155,8 +155,8 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
     end
 
-    describe "PATCH update" do
-        before(:each) do
+    fdescribe "PATCH update" do
+      before(:each) do
         @post = create(:post)
         @tag = create(:tag, name: "health")
         @post.tags << @tag
@@ -168,15 +168,27 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
 
       it "updates an existing post" do
-        patch :update, id: @post.id, post: @new_values
+        patch :update, id: @post.id, post: @new_values, tags: @tag.name
+        upost = assigns(:post)
 
-        expect(upost.title).to eq new_values[:title]
-        expect(upost.description).to eq new_values[:description]
+        expect(upost.title).to eq @new_values[:title]
+        expect(upost.description).to eq @new_values[:description]
       end
 
-      context "when tags are edited" do
+      describe "edits the post tags by" do
 
-        it "removes all tags" do
+        it "changing them" do
+          expect(@tag.posts.length).to eq 1
+
+          patch :update, id: @post.id, post: @new_values, tags: 'desserts'
+
+          upost = assigns(:post)
+
+          expect(upost.tags.length).to eq 1
+          expect(upost.tags.first.name).to eq "desserts"
+        end
+
+        it "removing them" do
           patch :update, id: @post.id, post: @new_values, tags: ''
           upost = assigns(:post)
 
@@ -184,27 +196,24 @@ RSpec.describe Dashboard::PostsController, type: :controller do
           expect(@tag.posts.length).to eq 0
         end
 
-        it "changes the tags" do
-          expect(Tag.find_by(name: 'health').posts.length).to eq 1
-
+        it "destroying the ones that don't refer to any post" do
+          expect(@tag.posts.length).to eq 1
           patch :update, id: @post.id, post: @new_values, tags: 'desserts'
-          upost = assigns(:post)
-
-          expect(upost.tags.length).to eq 1
-          expect(upost.tags.first.name).to eq "desserts"
-          expect(Tag.find_by(name: 'health').posts.length).to eq 0
+          expect(Tag.find_by(name: @tag.name)).to eq nil
         end
       end
 
-      context "responds by" do
+      describe "responds by" do
 
         it "redirecting to index template when sucessful" do
-          expect(response).to redirect_to('/dashboard/posts')
-          expect(response.status).to eq 302
+          expect(response.status).to eq 200
         end
 
         it "rendering the edit template when unsuccessful" do
-          post :update, :post => {title: '', description: ''}
+          patch :update,
+            id: @post.id,
+            post: {title: '', description: ''},
+            tags: 'health'
 
           expect(response).to render_template(:edit)
         end
