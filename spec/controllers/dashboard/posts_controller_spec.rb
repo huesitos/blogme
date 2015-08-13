@@ -19,17 +19,17 @@ RSpec.describe Dashboard::PostsController, type: :controller do
     end
 
     describe "POST create" do
+      let(:new_post) {{title: 'Un titulo', description: 'Una description'}}
 
       before(:each) do
-        @new_post = {title: 'Un titulo', description: 'Una description'}
-        post :create, :post => @new_post, :tags => "sports, science"
+        post :create, :post => new_post, :tags => "sports, science"
       end
 
       it "create a new post" do
         created_post = Post.last
         expect(created_post).to be_truthy
-        expect(created_post.title).to eq @new_post[:title]
-        expect(created_post.description).to eq @new_post[:description]
+        expect(created_post.title).to eq new_post[:title]
+        expect(created_post.description).to eq new_post[:description]
       end
 
       context "when tags don't exist" do
@@ -42,6 +42,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
 
       context "when tags exist" do
+        let(:tags) { "cooking, health"}
 
         before(:each) do
           @cooking = create(:tag, name: 'cooking')
@@ -50,15 +51,14 @@ RSpec.describe Dashboard::PostsController, type: :controller do
           @health = create(:tag, name: 'health')
           @health.posts << create(:post)
 
-          @tags = "cooking, health"
         end
 
         it "doesnt add new tags" do
-          post :create, :post => @new_post, :tags => @tags
+          post :create, :post => new_post, :tags => tags
 
-          created_post = Post.find_by(title: @new_post[:title])
+          created_post = Post.find_by(title: new_post[:title])
           expect(created_post).to be_truthy
-          expect(created_post.description).to eq @new_post[:description]
+          expect(created_post.description).to eq new_post[:description]
 
           expect(@cooking.posts.length).to eq 2
           expect(@health.posts.length).to eq 2
@@ -83,10 +83,10 @@ RSpec.describe Dashboard::PostsController, type: :controller do
 
         it "post's title and description must be present" do
           post :create, :post => {title: '', description: ''}
-          @post = assigns(:post)
+          upost = assigns(:post)
 
-          expect(@post.errors.full_messages.length). to eq 2
-          expect(@post.errors.full_messages).to include(
+          expect(upost.errors.full_messages.length). to eq 2
+          expect(upost.errors.full_messages).to include(
             "Title can't be blank",
             "Description can't be blank")
         end
@@ -95,10 +95,10 @@ RSpec.describe Dashboard::PostsController, type: :controller do
           post :create, :post => {
             title: Faker::Lorem.characters(101),
             description: Faker::Lorem.paragraph}
-          @post = assigns(:post)
+          upost = assigns(:post)
 
-          expect(@post.errors.full_messages.length).to eq 1
-          expect(@post.errors.full_messages).to include(
+          expect(upost.errors.full_messages.length).to eq 1
+          expect(upost.errors.full_messages).to include(
             "Title is too long (maximum is 100 characters)")
         end
       end
