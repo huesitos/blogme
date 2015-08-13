@@ -3,6 +3,8 @@
   %h3 Title
   %p=post.title
   %p=post.description.split.slice(0, 10).join(" ")+'...'
+  - puts post.inspect
+  %p=post.author.name
   %ul
     = render post.tags
   = link_to 'Edit', edit_dashboard_post_path(post.id)
