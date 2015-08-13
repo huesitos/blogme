@@ -3,39 +3,46 @@ require 'rails_helper'
 RSpec.describe Dashboard::PostsController, type: :controller do
   render_views
 
+  shared_examples_for "form template" do |name, view, extra|
+
+    fit "renders the #{name} template" do
+      expect(response).to render_template(view)
+      expect(response.status).to eq(200)
+    end
+
+    fit "renders a form with field title, description, and tags" do
+      expect(response.body).to include("class=\"#{name}_post\"")
+      expect(response.body).to include("Title")
+      expect(response.body).to include("Description")
+      expect(response.body).to include("Tags")
+    end
+  end
+
   context "when creating new posts" do
 
     describe "GET new" do
       before(:each) { get :new }
 
-      it "renders the new template" do
-        expect(response).to render_template(:new)
-        expect(response.status).to eq(200)
-      end
-
-      it "renders a form with field title and description" do
-        expect(response.body).to include("<form class='new_post' id='new_post' action='/dashboard/posts' method='post'")
-        expect(response.body).to include("Title")
-        expect(response.body).to include("Description")
-        expect(response.body).to include("Tags")
-      end
+      it_behaves_like "form template", 'new', :new
     end
 
     describe "POST create" do
 
       before(:each) do
         @new_post = {title: 'Un titulo', description: 'Una description'}
+        post :create, :post => @new_post, :tags => "sports, science"
+      end
+
+      it "create a new post" do
+        created_post = Post.last
+        expect(created_post).to be_truthy
+        expect(created_post.title).to eq @new_post[:title]
+        expect(created_post.description).to eq @new_post[:description]
       end
 
       context "when tags don't exist" do
+
         it "creates the new tags" do
-          post :create, :post => @new_post, :tags => "sports, science"
-
-          created_post = Post.last
-          expect(created_post).to be_truthy
-          expect(created_post.title).to eq @new_post[:title]
-          expect(created_post.description).to eq @new_post[:description]
-
           expect(Tag.all.length).to eq 2
           expect(Tag.find_by(name: 'sports')).to be_truthy
           expect(Tag.find_by(name: 'science')).to be_truthy
@@ -43,6 +50,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
 
       context "when tags exist" do
+
         before(:context) do
           @cooking = create(:tag, name: 'cooking')
           @cooking.posts << create(:post)
@@ -66,9 +74,8 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
 
       context "responds by" do
-        it "redirecting to index template when sucessful" do
-          post :create, :post => @new_post, :tags => "sports, science"
 
+        it "redirecting to index template when sucessful" do
           expect(response).to redirect_to('/dashboard/posts')
           expect(response.status).to eq 302
         end
@@ -119,10 +126,11 @@ RSpec.describe Dashboard::PostsController, type: :controller do
         expect(response).to render_template(:index)
       end
 
-      fit "displays posts with an edit and delete link" do
+      it "displays posts with an edit and delete link" do
         get :index
 
-        expect(response.body).to include("<a href=\"/dashboard/posts/#{Post.first.id}/edit\">")
+        expect(response.body).to include("href=\"/dashboard/posts/#{Post.first.id}/edit\"")
+        expect(response.body).to include("href=\"/dashboard/posts/#{Post.first.id}\"")
       end
     end
   end
@@ -130,16 +138,24 @@ RSpec.describe Dashboard::PostsController, type: :controller do
   context "updates existing posts"
 
     describe "GET edit" do
+      before(:each) do
+        post = create(:post)
+        post.tags << create(:tag)
+        get :edit, id: post.id
+      end
 
-      it "renders the edit template"
+      it_behaves_like "form template", 'edit', :edit
+
+      it "includes the post's attributes values in the form" do
+        post = assigns(:post)
+
+        expect(response.body).to include(post.title)
+        expect(response.body).to include(post.description)
+        expect(response.body).to include(post.tags.map(&:name).join(', '))
+      end
     end
 
-    describe "PATCH update" do
-
-      it "edits an existing post"
-      it "redirects to index template when sucessful"
-      it "renders the edit template when unsuccessful"
-    end
+    describe "PATCH update"
 
   context "destroys existing post"
 
