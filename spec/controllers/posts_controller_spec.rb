@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  before(:each) { @post = create(:post) }
+  before(:each) { @post = create(:post_wa) }
 
   describe "GET index" do
-    render_views
-
     it "assigns @posts" do
       get :index
       expect(assigns(:posts)).to eq([@post])

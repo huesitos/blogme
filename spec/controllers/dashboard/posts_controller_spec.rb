@@ -1,20 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Dashboard::PostsController, type: :controller do
-  render_views
 
   shared_examples_for "form template" do |name, view, extra|
 
     it "renders the #{name} template" do
       expect(response).to render_template(view)
       expect(response.status).to eq(200)
-    end
-
-    it "renders a form with field title, description, and tags" do
-      expect(response.body).to include("class=\"#{name}_post\"")
-      expect(response.body).to include("Title")
-      expect(response.body).to include("Description")
-      expect(response.body).to include("Tags")
     end
   end
 
@@ -125,13 +117,6 @@ RSpec.describe Dashboard::PostsController, type: :controller do
         expect(assigns(:posts)).to include(Post.first)
         expect(response).to render_template(:index)
       end
-
-      it "displays posts with an edit and delete link" do
-        get :index
-
-        expect(response.body).to include("href=\"/dashboard/posts/#{Post.first.id}/edit\"")
-        expect(response.body).to include("href=\"/dashboard/posts/#{Post.first.id}\"")
-      end
     end
   end
 
@@ -145,14 +130,6 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
 
       it_behaves_like "form template", 'edit', :edit
-
-      it "includes the post's attributes values in the form" do
-        post = assigns(:post)
-
-        expect(response.body).to include(post.title)
-        expect(response.body).to include(post.description)
-        expect(response.body).to include(post.tags.map(&:name).join(', '))
-      end
     end
 
     describe "PATCH update" do
