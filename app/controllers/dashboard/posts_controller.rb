@@ -15,6 +15,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
   def create
     @post = Post.new(post_params)
     @post.tags << get_tags
+    @post.author = current_author
 
     respond_to do |format|
       if @post.save

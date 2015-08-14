@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Dashboard::AuthorsController, type: :controller do
-
   let(:author) { create (:author) }
+  before(:each) { session[:author_id] = author.id }
 
   shared_examples_for "renders" do |name, view|
 
@@ -90,7 +90,7 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
           "Email has already been taken")
       end
 
-      fit "email has the correct format" do
+      it "email has the correct format" do
         post :create, author: { password: 'ksdfiasf', email: 'something.not.email' }
 
         author = assigns(:author)
@@ -98,7 +98,7 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
           'Email must have the format youremail@domain.com')
       end
 
-      fit "password is of length >= 6" do
+      it "password is of length >= 6" do
         post :create, author: { email: Faker::Internet.email, password: '32' }
 
         author = assigns(:author)

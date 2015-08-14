@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Dashboard::PostsController, type: :controller do
+  before(:each) do
+    author = create(:author)
+    session[:author_id] = author.id
+  end
 
   shared_examples_for "form template" do |name, view|
 
@@ -20,16 +24,20 @@ RSpec.describe Dashboard::PostsController, type: :controller do
 
     describe "POST create" do
       let(:new_post) {{title: 'Un titulo', description: 'Una description'}}
+      before(:each) { post :create, :post => new_post, :tags => "sports, science" }
 
-      before(:each) do
-        post :create, :post => new_post, :tags => "sports, science"
-      end
-
-      it "create a new post" do
+      it "creates a new post" do
         created_post = Post.last
         expect(created_post).to be_truthy
         expect(created_post.title).to eq new_post[:title]
         expect(created_post.description).to eq new_post[:description]
+      end
+
+      it "assigns the created post to the logged in user" do
+        author = Author.find(session[:author_id])
+
+        created_post = Post.last
+        expect(created_post.author.id).to eq author.id
       end
 
       context "when tags don't exist" do
@@ -76,30 +84,6 @@ RSpec.describe Dashboard::PostsController, type: :controller do
           post :create, :post => {title: '', description: ''}
 
           expect(response).to render_template(:new)
-        end
-      end
-
-      describe "validates" do
-
-        it "post's title and description must be present" do
-          post :create, :post => {title: '', description: ''}
-          upost = assigns(:post)
-
-          expect(upost.errors.full_messages.length). to eq 2
-          expect(upost.errors.full_messages).to include(
-            "Title can't be blank",
-            "Description can't be blank")
-        end
-
-        it "post's title length is <= 100" do
-          post :create, :post => {
-            title: Faker::Lorem.characters(101),
-            description: Faker::Lorem.paragraph}
-          upost = assigns(:post)
-
-          expect(upost.errors.full_messages.length).to eq 1
-          expect(upost.errors.full_messages).to include(
-            "Title is too long (maximum is 100 characters)")
         end
       end
     end
