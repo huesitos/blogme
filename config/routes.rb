@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'authors/:nickname', to: 'authors#show', as: :author
 
   namespace "dashboard" do
-    resources :posts, except: [:show]
+    resources :posts
     resources :authors, except: [:show]
     get 'tags/:id', to: 'tags#show', as: :tag
     get 'log_in', to: 'session#new', as: :log_in

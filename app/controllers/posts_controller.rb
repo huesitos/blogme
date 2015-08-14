@@ -5,10 +5,6 @@ class PostsController < ApplicationController
     else
       @posts = Post.all
     end
-
-    @tags_with_frequency = Tag.all.map do |tag|
-      [tag, tag.posts.length]
-    end
   end
 
   def show

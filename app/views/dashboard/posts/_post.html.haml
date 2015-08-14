@@ -7,5 +7,6 @@
   = link_to post.author.nickname, dashboard_posts_path(author: post.author.nickname)
   %ul
     = render post.tags
+  = link_to 'Show', dashboard_post_path(post.id)
   = link_to 'Edit', edit_dashboard_post_path(post.id)
   = link_to 'Destroy', dashboard_post_path(post.id), method: 'delete'

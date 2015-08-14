@@ -15,6 +15,12 @@ class Dashboard::PostsController < Dashboard::DashboardController
     end
   end
 
+  def show
+    @post = Post.find(params[:id])
+
+    render 'posts/show'
+  end
+
   def new
     @post = Post.new
   end
