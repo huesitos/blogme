@@ -51,9 +51,9 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
     }
 
     it "creates a new author" do
-      nauthors = Author.all.length
-
-      post :create, author: author_hash
+      expect {
+        post :create, author: author_hash
+      }.to change(Author, :count).by(1)
 
       author = Author.find_by(email: author_hash[:email])
       expect(author).to be_truthy
@@ -64,7 +64,7 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
       post :create, author: author_hash
 
       author = assigns(:author)
-      expect(response).to redirect_to("/dashboard/authors/")
+      expect(response).to redirect_to("/dashboard/authors")
     end
 
     it "renders to the new template when unsuccessful" do
@@ -133,7 +133,7 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
       patch :update, id: author.id, author: author_hash
 
       author = assigns(:author)
-      expect(response).to redirect_to("/dashboard/authors/")
+      expect(response).to redirect_to("/dashboard/authors")
     end
 
     it "renders to the edit template when unsuccessful" do
