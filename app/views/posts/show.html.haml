@@ -4,3 +4,8 @@
   %p= @post.description
   %ul
     = render @post.tags
+  - @post.comments.each do |c|
+    .comment
+      %p=c.name
+      %p=c.email
+      %p=c.content

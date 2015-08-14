@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814172049) do
+ActiveRecord::Schema.define(version: 20150814185843) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 20150814172049) do
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true
   add_index "authors", ["nickname"], name: "index_authors_on_nickname", unique: true
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "post_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
 
   create_table "posts", force: :cascade do |t|
     t.text     "title"

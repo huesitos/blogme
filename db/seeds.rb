@@ -30,3 +30,5 @@ p3 = FactoryGirl.create(:post)
 p3.tags << tag5
 
 nicole.posts << [p1, p2, p3]
+
+Post.all.each { |p| p.comments << FactoryGirl.create(:comment) }
