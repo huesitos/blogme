@@ -10,5 +10,8 @@ Rails.application.routes.draw do
     resources :posts, except: [:show]
     resources :tags, only: [:show]
     resources :authors, except: [:show]
+    get 'login', to: 'session#new', as: :login
+    post 'login', to: 'session#create'
+    delete 'logout', to: 'session#destroy', as: :logout
   end
 end
