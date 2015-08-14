@@ -18,6 +18,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
 
     respond_to do |format|
       if @post.save
+        flash[:notice] = "A new post was published."
         format.html { redirect_to :dashboard_posts }
       else
         format.html { render :new }
@@ -45,6 +46,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
 
     respond_to do |format|
       if @post.update(post_params)
+        flash[:notice] = "The post \"#{@post.title}\" was updated."
         format.html { redirect_to :dashboard_posts }
       else
         format.html { render :edit }
@@ -57,9 +59,12 @@ class Dashboard::PostsController < Dashboard::DashboardController
     @post.destroy
 
     respond_to do |format|
+      flash[:notice] = "The post was deleted."
       format.html { redirect_to :dashboard_posts }
     end
   end
+
+  helper_method :get_formatted_tags
 
   private
 
@@ -73,11 +78,15 @@ class Dashboard::PostsController < Dashboard::DashboardController
       if params[:tags]
         tmp_tags = params[:tags].split(',').join('').split(' ')
 
-          tmp_tags.each do |tag|
+        tmp_tags.each do |tag|
           tags << Tag.find_or_create_by(name: tag)
         end
       end
 
       tags
+    end
+
+    def get_formatted_tags(tags)
+      tags.map(&:name).join(', ')
     end
 end

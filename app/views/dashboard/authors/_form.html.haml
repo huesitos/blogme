@@ -1,6 +1,12 @@
 - @author.id ? @url = dashboard_author_path(@author.id) : @url = dashboard_authors_path
 
 = form_for @author, url: @url do |f|
+  - if not @author.errors.empty?
+    %h4="Couldn't create the author because of #{pluralize(@author.errors.count, 'error')}."
+    %ul
+      - @author.errors.full_messages.each do |error|
+        %li= error
+
   .field
     = f.label :name
     = f.text_field :name

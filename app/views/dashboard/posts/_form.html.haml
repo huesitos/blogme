@@ -1,6 +1,12 @@
 - @post.id ? @url = dashboard_post_path(@post.id) : @url = dashboard_posts_path
 
 = form_for @post, url: @url do |f|
+  - if not @post.errors.empty?
+    %h4="Couldn't create the post because of #{pluralize(@post.errors.count, 'error')}."
+    %ul
+      - @post.errors.full_messages.each do |error|
+        %li= error
+
   .field
     = f.label :title
     = f.text_field :title
@@ -9,6 +15,6 @@
     = f.text_area :description
   .field
     = label_tag :tags, 'Tags'
-    = text_field_tag :tags, @tags
+    = text_field_tag :tags, get_formatted_tags(@post.tags)
   .field
     = f.submit 'Save'
