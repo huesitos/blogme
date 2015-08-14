@@ -87,8 +87,15 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
 
         author = assigns(:author)
         expect(author.errors.full_messages).to include(
-          "Email has already been taken"
-        )
+          "Email has already been taken")
+      end
+
+      fit "email has the correct format" do
+        post :create, author: { password: 'ksdfiasf', email: 'something.not.email' }
+
+        author = assigns(:author)
+        expect(author.errors.full_messages).to include(
+          'Email must have the format youremail@domain.com')
       end
 
       fit "password is of length >= 6" do
