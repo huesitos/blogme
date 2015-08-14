@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Dashboard::PostsController, type: :controller do
+  let(:author) { create(:author) }
   before(:each) do
-    author = create(:author)
     session[:author_id] = author.id
   end
 
@@ -34,8 +34,6 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
 
       it "assigns the created post to the logged in user" do
-        author = Author.find(session[:author_id])
-
         created_post = Post.last
         expect(created_post.author.id).to eq author.id
       end
@@ -58,7 +56,6 @@ RSpec.describe Dashboard::PostsController, type: :controller do
 
           @health = create(:tag, name: 'health')
           @health.posts << create(:post)
-
         end
 
         it "doesnt add new tags" do
@@ -75,8 +72,8 @@ RSpec.describe Dashboard::PostsController, type: :controller do
 
       describe "responds by" do
 
-        it "redirecting to index template when sucessful" do
-          expect(response).to redirect_to(:dashboard_posts)
+        it "redirecting to show template when sucessful" do
+          expect(response).to redirect_to(dashboard_post_path(assigns[:post].id))
           expect(response.status).to eq 302
         end
 
@@ -115,7 +112,6 @@ RSpec.describe Dashboard::PostsController, type: :controller do
       end
 
       it "displays all posts from an author" do
-        author = Author.first
         author.posts << Post.all
         get :index, author: author.nickname
 
@@ -145,6 +141,7 @@ RSpec.describe Dashboard::PostsController, type: :controller do
         @post = create(:post)
         @tag = create(:tag, name: "health")
         @post.tags << @tag
+        author.posts << @post
 
         @new_values = {
           title: Faker::Lorem.sentence(5),
@@ -190,8 +187,11 @@ RSpec.describe Dashboard::PostsController, type: :controller do
 
       describe "responds by" do
 
-        it "redirecting to index template when sucessful" do
-          expect(response.status).to eq 200
+        it "redirecting to show template when sucessful" do
+          patch :update, id: @post.id, post: @new_values, tags: ''
+
+          expect(response).to redirect_to(dashboard_post_path(assigns[:post].id))
+          expect(response.status).to eq 302
         end
 
         it "rendering the edit template when unsuccessful" do
@@ -203,22 +203,65 @@ RSpec.describe Dashboard::PostsController, type: :controller do
           expect(response).to render_template(:edit)
         end
       end
+
+      it "denies any update that is not done by the owner of the post" do
+        rauthor = create(:rauthor)
+        session[:author_id] = rauthor.id
+
+        patch :update,
+          id: @post.id,
+          post: @new_values,
+          tags: ''
+        expect(response).to redirect_to(:dashboard_posts)
+      end
+
+      it "allows only the owner or admin to update the post" do
+        session[:author_id] = @post.author.id
+
+        patch :update,
+          id: @post.id,
+          post: @new_values,
+          tags: ''
+
+        expect(response).to redirect_to(dashboard_post_path(assigns[:post].id))
+      end
     end
 
   describe "destroys existing post"
 
     describe "DELETE destroy" do
       let(:post) { create(:post) }
+      before(:each) { author.posts << post }
 
       it "destroy an existing post" do
-        delete :destroy, id: post.id
+        pid = post.id
 
-        expect(Post.all.length).to eq 0
+        expect{
+          delete :destroy, id: post.id
+        }.to change(Post, :count).by(-1)
+
+        expect(Post.find_by(id: pid)).to be_falsy
       end
 
       it "redirects to the index template" do
         delete :destroy, id: post.id
 
+        expect(response).to redirect_to(:dashboard_posts)
+      end
+
+      it "denies an author that is not the owner to destroy the post" do
+        rauthor = create(:rauthor)
+        session[:author_id] = rauthor.id
+
+        delete :destroy, id: post.id
+        expect(response).to redirect_to(:dashboard_posts)
+        expect(Post.find_by(id: post.id)).to be_truthy
+      end
+
+      it "allows only the owner or admin to destroy the post" do
+        session[:author_id] = post.author.id
+
+        delete :destroy, id: post.id
         expect(response).to redirect_to(:dashboard_posts)
       end
     end

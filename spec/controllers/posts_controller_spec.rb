@@ -9,16 +9,6 @@ RSpec.describe PostsController, type: :controller do
       expect(assigns(:posts)).to eq([@post])
     end
 
-    it "assigns @tags_with_frequency" do
-      tag = create(:tag)
-      @post.tags << tag
-
-      get :index
-      tags_with_frequency = assigns(:tags_with_frequency)
-
-      expect(tags_with_frequency).to eq([[tag,1]])
-    end
-
     it "renders the index template" do
       get :index
 
