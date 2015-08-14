@@ -2,7 +2,11 @@
   %p=post.created_at.to_date.strftime("%y %^b %d")
   %h3 Title
   %p=post.title
-  %p=post.description.split.slice(0, 10).join(" ")+'...'
+  - description = post.description.split('</p>').join(' ')
+  - description = strip_tags(description).split(' ')
+  - description.length > 10 ? extra = '...' : extra = ''
+  = description.slice(0, 10).join(' ') + extra
+
   - if current_author.role == "admin"
     = link_to post.author.nickname, dashboard_posts_path(nickname: post.author.nickname)
   %ul

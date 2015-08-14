@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
     def current_author
       if session[:author_id]
-        @current_author ||= Author.find(session[:author_id])
+        @current_author ||= Author.find_by(id: session[:author_id])
       else
         @current_author = nil
       end

@@ -12,7 +12,7 @@
     = f.text_field :title
   .field
     = f.label :description
-    = f.text_area :description
+    = f.text_area :description, id: "eg-textarea", class: "text-small"
   .field
     = label_tag :tags, 'Tags'
     = text_field_tag :tags, get_formatted_tags(@post.tags)

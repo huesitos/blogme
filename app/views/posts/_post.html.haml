@@ -3,7 +3,9 @@
   %h3 Title
   %p=post.title
   %h3 Description
-  %p=post.description.split.slice(0, 10).join(" ")+'...'
+  - description = post.description.split('</p>').join(' ')
+  = strip_tags(description).split(' ').slice(0, 10).join(' ')
+
   =link_to post.author.nickname, author_path(post.author.nickname)
   %ul
     = render post.tags
