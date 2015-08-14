@@ -4,13 +4,23 @@ class Dashboard::PostsController < Dashboard::DashboardController
   def index
     if params[:tag]
       @posts = Tag.find_by(name: params[:tag]).posts
-    elsif params[:nickname]
-      @posts = Author.find_by(nickname: params[:nickname]).posts
     else
       @posts = Post.all
     end
 
-    @tags_with_frequency = Tag.all.map do |tag|
+    if current_author.role != "admin"
+      @posts = @posts.where(author_id: current_author.id)
+
+      @tags = @posts.collect(&:tags).flatten.uniq
+    else
+      if params[:nickname]
+        @posts = Author.find_by(nickname: params[:nickname]).posts
+      end
+
+      @tags = Tag.all
+    end
+
+    @tags_with_frequency = @tags.map do |tag|
       [tag, tag.posts.length]
     end
   end
@@ -33,7 +43,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
     respond_to do |format|
       if @post.save
         flash[:notice] = "A new post was published."
-        format.html { redirect_to :dashboard_posts }
+        format.html { redirect_to dashboard_post_path(@post.id) }
       else
         format.html { render :new }
       end
@@ -47,34 +57,42 @@ class Dashboard::PostsController < Dashboard::DashboardController
 
   def update
     @post = Post.find(params[:id])
+    if current_author.id == @post.author.id or current_author.role == "admin"
+      # Change posts tags
+      # If any of the post's previous tags posts.length drops to zero
+      # it means no other post references the tag, and thus it should be
+      # destroyed.
+      new_tags = get_tags
+      old_tags = @post.tags.to_a
+      @post.tags = new_tags
 
-    # Change posts tags
-    # If any of the post's previous tags posts.length drops to zero
-    # it means no other post references the tag, and thus it should be
-    # destroyed.
-    new_tags = get_tags
-    old_tags = @post.tags.to_a
-    @post.tags = new_tags
+      old_tags.each { |tag| if tag.posts.length == 0 then tag.destroy end }
 
-    old_tags.each { |tag| if tag.posts.length == 0 then tag.destroy end }
-
-    respond_to do |format|
-      if @post.update(post_params)
-        flash[:notice] = "The post \"#{@post.title}\" was updated."
-        format.html { redirect_to :dashboard_posts }
-      else
-        format.html { render :edit }
+      respond_to do |format|
+        if @post.update(post_params)
+          flash[:notice] = "The post \"#{@post.title}\" was updated."
+          format.html { redirect_to dashboard_post_path(@post.id) }
+        else
+          format.html { render :edit }
+        end
       end
+    else
+      redirect_to :dashboard_posts
     end
   end
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
 
-    respond_to do |format|
-      flash[:notice] = "The post was deleted."
-      format.html { redirect_to :dashboard_posts }
+    if current_author.id == @post.author.id or current_author.role == 'admin'
+      @post.destroy
+
+      respond_to do |format|
+        flash[:notice] = "The post was deleted."
+        format.html { redirect_to :dashboard_posts }
+      end
+    else
+      redirect_to :dashboard_posts
     end
   end
 

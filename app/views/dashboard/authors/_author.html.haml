@@ -3,8 +3,10 @@
   %p="#{author.name} #{author.last_name}"
   %p=author.email
   %p=author.message
+  %p=author.role
   %p
     Number of posts:
     = author.posts.count
   = link_to 'Edit', edit_dashboard_author_path(author.id)
-  = link_to 'Delete', dashboard_author_path(author.id), method: 'delete'
+  - if author.role != 'admin'
+    = link_to 'Delete', dashboard_author_path(author.id), method: 'delete'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814150011) do
+ActiveRecord::Schema.define(version: 20150814172049) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
@@ -19,10 +19,11 @@ ActiveRecord::Schema.define(version: 20150814150011) do
     t.string   "email"
     t.string   "image"
     t.string   "message"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "password_digest"
     t.string   "nickname"
+    t.string   "role",            default: "editor"
   end
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true

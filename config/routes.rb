@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'authors/:nickname', to: 'authors#show', as: :author
 
   namespace "dashboard" do
+    root 'posts#index', as: :dashboard
+
     resources :posts
     resources :authors, except: [:show]
     get 'tags/:id', to: 'tags#show', as: :tag

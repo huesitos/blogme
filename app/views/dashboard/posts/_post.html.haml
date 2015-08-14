@@ -3,8 +3,8 @@
   %h3 Title
   %p=post.title
   %p=post.description.split.slice(0, 10).join(" ")+'...'
-  - puts post.inspect
-  = link_to post.author.nickname, dashboard_posts_path(author: post.author.nickname)
+  - if current_author.role == "admin"
+    = link_to post.author.nickname, dashboard_posts_path(nickname: post.author.nickname)
   %ul
     = render post.tags
   = link_to 'Show', dashboard_post_path(post.id)

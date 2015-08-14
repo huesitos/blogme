@@ -1,5 +1,6 @@
 class Dashboard::AuthorsController < Dashboard::DashboardController
   before_action :authenticate_author!
+  before_action :authorize_author!
 
   def index
     @authors = Author.all
@@ -60,5 +61,11 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
         :image,
         :message,
         :email)
+    end
+
+    def authorize_author!
+      if current_author.role != "admin"
+        redirect_to dashboard_posts_path
+      end
     end
 end
