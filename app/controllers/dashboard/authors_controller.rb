@@ -52,6 +52,13 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
   private
 
     def author_params
-      params.require(:author).permit(:name, :last_name, :password, :image, :message, :email)
+      params.require(:author).permit(
+        :name,
+        :last_name,
+        :nickname,
+        :password,
+        :image,
+        :message,
+        :email)
     end
 end

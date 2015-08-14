@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813235327) do
+ActiveRecord::Schema.define(version: 20150814150011) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
@@ -22,9 +22,11 @@ ActiveRecord::Schema.define(version: 20150813235327) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
+    t.string   "nickname"
   end
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true
+  add_index "authors", ["nickname"], name: "index_authors_on_nickname", unique: true
 
   create_table "posts", force: :cascade do |t|
     t.text     "title"

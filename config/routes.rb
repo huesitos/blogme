@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'posts/:id', to: 'posts#show', as: :post
 
   get 'tags/:tag', to: 'tags#show', as: :tag
+  get 'authors/:nickname', to: 'authors#show', as: :author
 
   namespace "dashboard" do
     resources :posts, except: [:show]

@@ -3,6 +3,7 @@ FactoryGirl.define do
   factory :author do
     name "Denisse Margarita"
     last_name "Lara Martin"
+    nickname "Denisse"
     email "dmlaramartin@gmail.com"
     password '123456'
     image "https://lh5.googleusercontent.com/-WmhCxsI_pds/VW--rLHXvrI/AAAAAAAAAcM/UvKhmhf7XCI/s778-no/IMG_0253.JPG"

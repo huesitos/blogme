@@ -3,6 +3,17 @@ require 'rails_helper'
 RSpec.describe Dashboard::AuthorsController, type: :controller do
   let(:author) { create (:author) }
   before(:each) { session[:author_id] = author.id }
+  let(:author_hash) {
+    {
+      name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      nickname: Faker::Internet.user_name,
+      image: Faker::Avatar.image,
+      email: Faker::Internet.email,
+      password: Faker::Internet.password(8),
+      message: Faker::Lorem.sentence
+    }
+  }
 
   shared_examples_for "renders" do |name, view|
 
@@ -39,16 +50,6 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
   end
 
   describe "POST create" do
-    let(:author_hash) {
-      {
-        name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        image: Faker::Avatar.image,
-        email: Faker::Internet.email,
-        password: Faker::Internet.password(8),
-        message: Faker::Lorem.sentence
-      }
-    }
 
     it "creates a new author" do
       expect {
@@ -110,16 +111,6 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
   end
 
   describe "PATCH update" do
-    let(:author_hash) {
-      {
-        name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        image: Faker::Avatar.image,
-        email: Faker::Internet.email,
-        password: Faker::Internet.password(8),
-        message: Faker::Lorem.sentence
-      }
-    }
 
     it "updates an existing author" do
       auth_id = author.id
