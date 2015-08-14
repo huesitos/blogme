@@ -6,17 +6,16 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
 
   shared_examples_for "renders" do |name, view|
 
-    it "renders the #{name} template" do
+    it "the #{name} template" do
       expect(response).to render_template(view)
       expect(response.status).to eq(200)
     end
   end
 
   describe "GET index" do
+    before(:each) { get :index }
 
     it "assigns @authors" do
-      get :index
-
       expect(assigns(:authors)).to eq [author]
     end
 
@@ -24,10 +23,9 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
   end
 
   describe "GET show" do
+    before(:each) { get :show, id: author.id }
 
     it "assigns @author" do
-      get :show, id: author.id
-
       expect(assigns(:author)).to eq author
     end
 
@@ -35,17 +33,17 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
   end
 
   describe "GET new" do
+    before(:each) { get :new }
 
     it_behaves_like "renders", 'new', :new
   end
 
   describe "GET edit" do
+    before(:each) { get :edit, id: author.id }
 
     it_behaves_like "renders", 'edit', :edit
 
     it "assigns @author" do
-      get :edit, author.id
-
       expect(assigns(:author)).to eq author
     end
   end
@@ -75,19 +73,19 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
     it "redirects to index when sucessful" do
       post :create, author: author_hash
 
-      expect(response).to redirect_to(:index)
+      expect(response).to redirect_to('/dashboard/authors')
     end
 
     it "renders to the new template when unsuccessful" do
-      post :create, author: {}
+      post :create, author: { email: '' }
 
-      expect(response).to render_template(:edit)
+      expect(response).to render_template(:new)
     end
 
     describe "validates" do
 
       it "email is present" do
-        post :create, author: {}
+        post :create, author: {email: ''}
 
         author = assigns(:author)
         expect(author.errors.full_messages).to include("Email can't be blank")
@@ -97,15 +95,18 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
         post :create, author: { email: author.email }
 
         author = assigns(:author)
-        expect(author.errors.full_messages).to include("Email must be unique")
+        expect(author.errors.full_messages).to include(
+          "Email has already been taken"
+        )
       end
 
-      it "password is of length >= 6" do
-        post :create, author: { password: '32' }
+      fit "password is of length >= 6" do
+        post :create, author: { email: Faker::Internet.email, password: '32' }
 
         author = assigns(:author)
         expect(author.errors.full_messages).to include(
-          "Password is too short ( minimum length is 6 characters)")
+          "Password is too short (minimum is 6 characters)"
+        )
       end
     end
   end
@@ -133,11 +134,11 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
     it "redirects to index when sucessful" do
       patch :update, id: author.id, author: author_hash
 
-      expect(response).to redirect_to(:index)
+      expect(response).to redirect_to('/dashboard/authors')
     end
 
     it "renders to the edit template when unsuccessful" do
-      patch :update, id: author.id, author: {}
+      patch :update, id: author.id, author: { email: '' }
 
       expect(response).to render_template(:edit)
     end
@@ -146,10 +147,11 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
   describe "DELETE destroy" do
 
     it "destroys an author" do
+      author_id = author.id
       delete :destroy, id: author.id
 
       expect(Author.all.length).to eq 0
-      expect(author).to be_falsy
+      expect(Author.find_by(id: author_id)).to eq nil
     end
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Dashboard::PostsController, type: :controller do
 
-  shared_examples_for "form template" do |name, view, extra|
+  shared_examples_for "form template" do |name, view|
 
     it "renders the #{name} template" do
       expect(response).to render_template(view)

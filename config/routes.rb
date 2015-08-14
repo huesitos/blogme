@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   namespace "dashboard" do
     resources :posts
     resources :tags, only: [:show]
+    resources :authors
   end
 end
