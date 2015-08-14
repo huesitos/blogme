@@ -1,0 +1,4 @@
+.comment
+  %p=comment.name
+  %p=comment.content
+  = link_to 'Destroy', dashboard_comment_path(comment.id), method: :delete

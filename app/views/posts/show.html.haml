@@ -4,8 +4,16 @@
   %p= @post.description
   %ul
     = render @post.tags
-  - @post.comments.each do |c|
-    .comment
-      %p=c.name
-      %p=c.email
-      %p=c.content
+
+  .comments
+    = render @post.comments
+
+  = form_for @comment, url: comments_path(@post.id) do |f|
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :content
+      = f.text_area :content
+    .field
+      = f.submit 'Comment'

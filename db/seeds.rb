@@ -1,6 +1,7 @@
 Author.destroy_all
 Post.destroy_all
 Tag.destroy_all
+Comment.destroy_all
 
 tag1 = FactoryGirl.create(:tag, name: 'cooking')
 tag2 = FactoryGirl.create(:tag, name: 'sports')
