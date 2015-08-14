@@ -2,7 +2,14 @@ class Dashboard::PostsController < Dashboard::DashboardController
   before_action :authenticate_author!
 
   def index
-    @posts = Post.all
+    if params[:tag]
+      @posts = Tag.find_by(name: params[:tag]).posts
+    elsif params[:nickname]
+      @posts = Author.find_by(nickname: params[:nickname]).posts
+    else
+      @posts = Post.all
+    end
+
     @tags_with_frequency = Tag.all.map do |tag|
       [tag, tag.posts.length]
     end

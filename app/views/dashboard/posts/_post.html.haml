@@ -4,7 +4,7 @@
   %p=post.title
   %p=post.description.split.slice(0, 10).join(" ")+'...'
   - puts post.inspect
-  %p=post.author.name
+  = link_to post.author.nickname, dashboard_posts_path(author: post.author.nickname)
   %ul
     = render post.tags
   = link_to 'Edit', edit_dashboard_post_path(post.id)

@@ -101,6 +101,30 @@ RSpec.describe Dashboard::PostsController, type: :controller do
         expect(assigns(:posts)).to include(Post.first)
         expect(response).to render_template(:index)
       end
+
+      it "displays all posts from a tag" do
+        tag = create(:tag, name: 'cooking')
+        tag.posts << Post.first
+
+        get :index, tag: 'cooking'
+
+        posts = assigns(:posts)
+        expect(posts).to be_truthy
+        expect(posts.map(&:tags)).to eq([[tag]])
+        expect(response).to render_template(:index)
+      end
+
+      it "displays all posts from an author" do
+        author = Author.first
+        author.posts << Post.all
+        get :index, author: author.nickname
+
+        posts = assigns(:posts)
+
+        expect(posts).to be_truthy
+        expect(posts.map(&:author)).to eq([author, author])
+        expect(response).to render_template(:index)
+      end
     end
   end
 
