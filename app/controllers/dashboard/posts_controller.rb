@@ -1,4 +1,6 @@
-class Dashboard::PostsController < ApplicationController
+class Dashboard::PostsController < Dashboard::DashboardController
+  before_action :authenticate_author!
+
   def index
     @posts = Post.all
     @tags_with_frequency = Tag.all.map do |tag|

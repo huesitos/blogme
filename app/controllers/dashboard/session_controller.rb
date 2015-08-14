@@ -1,4 +1,4 @@
-class Dashboard::SessionController < ApplicationController
+class Dashboard::SessionController < Dashboard::DashboardController
   def new
   end
 

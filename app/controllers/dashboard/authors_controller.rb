@@ -1,4 +1,5 @@
-class Dashboard::AuthorsController < ApplicationController
+class Dashboard::AuthorsController < Dashboard::DashboardController
+  before_action :authenticate_author!
 
   def index
     @authors = Author.all

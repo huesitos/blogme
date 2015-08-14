@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Dashboard::SessionController, type: :controller do
 
-  context "when login in" do
+  context "when log_in in" do
 
     describe "GET new" do
 
-      it "renders the new (login) themplate" do
+      it "renders the new (log_in) themplate" do
         get :new
 
         expect(response).to render_template(:new)
@@ -15,7 +15,7 @@ RSpec.describe Dashboard::SessionController, type: :controller do
 
     describe "POST create" do
 
-      it "only registered authors can login" do
+      it "only registered authors can log_in" do
         post :create,
           email: Faker::Internet.email,
           password: Faker::Internet.password
@@ -33,7 +33,7 @@ RSpec.describe Dashboard::SessionController, type: :controller do
         expect(response).to redirect_to('/dashboard/posts')
       end
 
-      it "renders the login template when unsuccessful" do
+      it "renders the log_in template when unsuccessful" do
         post :create,
           email: Faker::Internet.email,
           password: Faker::Internet.password
@@ -43,11 +43,11 @@ RSpec.describe Dashboard::SessionController, type: :controller do
     end
   end
 
-  context "when login in" do
+  context "when log_in in" do
 
     describe "DELETE destroy" do
 
-      it "authors can logout" do
+      it "authors can log_out" do
         author = create(:author)
         post :create, email: author.email, password: author.password
 
