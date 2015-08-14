@@ -1,0 +1,23 @@
+- @author.id ? @url = dashboard_author_path(@author.id) : @url = dashboard_authors_path
+
+= form_for @author, url: @url do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :last_name
+    = f.text_field :last_name
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :image, 'Image url'
+    = f.text_field :image
+  .field
+    = f.label :message
+    = f.text_area :message
+  .field
+    = f.label :password
+    = f.text_field :password
+  .field
+    = f.submit 'Save'

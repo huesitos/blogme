@@ -1,4 +1,5 @@
 - @post.id ? @url = dashboard_post_path(@post.id) : @url = dashboard_posts_path
+
 = form_for @post, url: @url do |f|
   .field
     = f.label :title

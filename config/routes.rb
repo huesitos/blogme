@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   get 'tags/:id', to: 'tags#show', as: :tag
 
   namespace "dashboard" do
-    resources :posts
+    resources :posts, except: [:show]
     resources :tags, only: [:show]
-    resources :authors
+    resources :authors, except: [:show]
   end
 end

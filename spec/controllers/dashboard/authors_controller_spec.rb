@@ -22,16 +22,6 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
     it_behaves_like "renders", 'index', :index
   end
 
-  describe "GET show" do
-    before(:each) { get :show, id: author.id }
-
-    it "assigns @author" do
-      expect(assigns(:author)).to eq author
-    end
-
-    it_behaves_like "renders", 'show', :show
-  end
-
   describe "GET new" do
     before(:each) { get :new }
 
@@ -73,7 +63,8 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
     it "redirects to index when sucessful" do
       post :create, author: author_hash
 
-      expect(response).to redirect_to('/dashboard/authors')
+      author = assigns(:author)
+      expect(response).to redirect_to("/dashboard/authors/")
     end
 
     it "renders to the new template when unsuccessful" do
@@ -134,7 +125,8 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
     it "redirects to index when sucessful" do
       patch :update, id: author.id, author: author_hash
 
-      expect(response).to redirect_to('/dashboard/authors')
+      author = assigns(:author)
+      expect(response).to redirect_to("/dashboard/authors/")
     end
 
     it "renders to the edit template when unsuccessful" do

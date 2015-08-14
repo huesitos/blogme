@@ -1,0 +1,7 @@
+.author
+  = image_tag(author.image, width: 100, height: 100)
+  %p="#{author.name} #{author.last_name}"
+  %p=author.email
+  %p=author.message
+  = link_to 'Edit', edit_dashboard_author_path(author.id)
+  = link_to 'Delete', dashboard_author_path(author.id), method: 'delete'
