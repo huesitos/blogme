@@ -17,6 +17,8 @@ FactoryGirl.create(:post).tags << [tag2, tag3]
 Post.all.each { |p| denisse.posts << p }
 
 nicole = FactoryGirl.create(:author,
+  name: "Nicole Margarita",
+  last_name: "Lara Martin",
   email: 'nicolelaramartin@gmail.com',
   nickname: 'nicole',
   role: 'editor')

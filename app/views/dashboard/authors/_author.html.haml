@@ -1,12 +1,16 @@
-.author
-  = image_tag(author.image, width: 100, height: 100)
-  %p="#{author.name} #{author.last_name}"
-  %p=author.email
-  %p=author.message
-  %p=author.role
-  %p
-    Number of posts:
-    = author.posts.count
-  = link_to 'Edit', edit_dashboard_author_path(author.id)
-  - if author.role != 'admin'
-    = link_to 'Delete', dashboard_author_path(author.id), method: 'delete'
+.author.col-sm-4
+  .thumbnail
+    = image_tag(author.image)
+    .caption
+      %h3="#{author.name} #{author.last_name}"
+      %p=author.email
+      %p=author.message
+      %p
+        Role:
+        =author.role
+      %p
+        Number of posts:
+        = author.posts.count
+      = link_to 'Edit', edit_dashboard_author_path(author.id), class: 'btn btn-primary'
+      - if author.role != 'admin'
+        = link_to 'Delete', dashboard_author_path(author.id), method: 'delete', data: {:confirm => "Are you sure?"}, class: 'btn btn-danger'
