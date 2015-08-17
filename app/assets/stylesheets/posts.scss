@@ -1,3 +1,45 @@
-// Place all the styles related to the posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin simple-filter($class, $bcolor) {
+  list-style: none;
+  padding: 0;
+
+  .#{$class} {
+    display: inline-block;
+    background-color: $bcolor;
+    border-radius: 5px;
+    padding: 5px;
+
+    a {
+      span {
+        color: #333;
+      }
+    }
+  }
+}
+
+#dashboard.posts {
+  .thumbnail {
+    padding: 1em;
+  }
+
+  .post {
+    .tags {
+      margin-top: 5px;
+    }
+
+    .options {
+      text-align: right;
+
+      a {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .tags {
+    @include simple-filter(tag, #eee)
+  }
+
+  .authors {
+    @include simple-filter(author, #e2eeff)
+  }
+}

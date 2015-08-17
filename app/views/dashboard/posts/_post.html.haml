@@ -1,16 +1,16 @@
-.post
-  %p=post.created_at.to_date.strftime("%y %^b %d")
-  %h3 Title
-  %p=post.title
-  - description = post.description.split('</p>').join(' ')
-  - description = strip_tags(description).split(' ')
-  - description.length > 10 ? extra = '...' : extra = ''
-  = description.slice(0, 10).join(' ') + extra
+.post.col-sm-4
+  .thumbnail
+    %h3=link_to post.title.split(' ').slice(0, 10).join(' ')+'...', dashboard_post_path(post.id)
+    %p=post.created_at.to_date.strftime("%y %^b %d")
+    - description = post.description.split('</p>').join(' ')
+    - description = strip_tags(description).split(' ')
+    - description.length > 10 ? extra = '...' : extra = ''
+    %p= description.slice(0, 50).join(' ') + extra
 
-  - if current_author.role == "admin"
-    = link_to post.author.nickname, dashboard_posts_path(nickname: post.author.nickname)
-  %ul
-    = render post.tags
-  = link_to 'Show', dashboard_post_path(post.id)
-  = link_to 'Edit', edit_dashboard_post_path(post.id)
-  = link_to 'Destroy', dashboard_post_path(post.id), method: 'delete'
+    - if current_author.role == "admin"
+      = link_to "#{post.author.name} #{post.author.last_name}", dashboard_posts_path(nickname: post.author.nickname)
+    %ul.tags
+      = render post.tags
+    .options
+      = link_to 'Edit', edit_dashboard_post_path(post.id), class: 'btn btn-primary'
+      = link_to 'Destroy', dashboard_post_path(post.id), method: 'delete', data: {:confirm => "Are you sure?"}, class: 'btn btn-danger'
