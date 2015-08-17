@@ -44,7 +44,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
 
     respond_to do |format|
       if @post.save
-        flash[:notice] = "A new post was published."
+        flash[:success] = "A new post was published."
         format.html { redirect_to dashboard_post_path(@post.id) }
       else
         format.html { render :new }
@@ -72,7 +72,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
 
       respond_to do |format|
         if @post.update(post_params)
-          flash[:notice] = "The post \"#{@post.title}\" was updated."
+          flash[:success] = "The post \"#{@post.title}\" was updated."
           format.html { redirect_to dashboard_post_path(@post.id) }
         else
           format.html { render :edit }
@@ -90,7 +90,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
       @post.destroy
 
       respond_to do |format|
-        flash[:notice] = "The post was deleted."
+        flash[:success] = "The post was deleted."
         format.html { redirect_to :dashboard_posts }
       end
     else

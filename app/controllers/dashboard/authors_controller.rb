@@ -19,7 +19,7 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
 
     respond_to do |format|
       if @author.save
-        flash[:notice] = "A new author was added."
+        flash[:success] = "A new author was added."
         format.html { redirect_to dashboard_authors_path }
       else
         format.html { render :new }
@@ -32,7 +32,7 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
 
     respond_to do |format|
       if @author.update(author_params)
-        flash[:notice] = "Author #{@author.email} was updated."
+        flash[:success] = "Author #{@author.email} was updated."
         format.html { redirect_to dashboard_authors_path }
       else
         format.html { render :edit }
@@ -45,7 +45,7 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
     @author.destroy
 
     respond_to do |format|
-      flash[:notice] = "The author was deleted."
+      flash[:success] = "The author was deleted."
       format.html { redirect_to dashboard_authors_path }
     end
   end

@@ -6,16 +6,20 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body{:id => "dashboard", :class => controller.controller_name}
-    %nav.menu.col-sm-2
-      = link_to "Posts", dashboard_posts_path
-      = link_to "New post", new_dashboard_post_path
-      - if current_author.role == "admin"
-        = link_to "Authors", dashboard_authors_path
-        = link_to "New author", new_dashboard_author_path
-      = link_to "Log out", dashboard_log_out_path, method: :delete
+    -if current_author
+      %nav.menu.col-sm-2
+        = link_to "Posts", dashboard_posts_path
+        = link_to "New post", new_dashboard_post_path
+        - if current_author.role == "admin"
+          = link_to "Authors", dashboard_authors_path
+          = link_to "New author", new_dashboard_author_path
+        = link_to "Log out", dashboard_log_out_path, method: :delete
 
     .main.col-sm-9
-      %ul
+      %ul.flashes
         - flash.each do |name, msg|
-          = content_tag :li, msg, :id => "flash_#{name}"
+          %div{class: "alert alert-dimissible alert-#{name}"}
+            %button{type: "button", class: "close", 'data-dismiss': "alert", 'aria-label': "Close"}
+              %span{'aria-hidden': true} &times;
+            = content_tag :li, msg
       = yield

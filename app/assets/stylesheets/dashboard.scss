@@ -1,6 +1,12 @@
 #dashboard {
   padding: 3em 0;
 
+  .flashes {
+    list-style: none;
+    padding: 0;
+    width: 80%;
+  }
+
   a {
     &:hover {
       text-decoration: none;
