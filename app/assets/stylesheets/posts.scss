@@ -40,4 +40,8 @@
   .authors {
     @include simple-filter(author, #e2eeff)
   }
+
+  .froala-wrapper.f-basic {
+    min-height: 400px;
+  }
 }

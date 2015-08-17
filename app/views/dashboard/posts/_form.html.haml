@@ -7,14 +7,16 @@
       - @post.errors.full_messages.each do |error|
         %li= error
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :description
-    = f.text_area :description, id: "eg-textarea", class: "text-small"
-  .field
-    = label_tag :tags, 'Tags'
-    = text_field_tag :tags, get_formatted_tags(@post.tags)
-  .field
-    = f.submit 'Save'
+  .form-horizontal
+    .field.form-group
+      = f.label :title, class: 'control-label col-sm-1'
+      .col-sm-7
+        = f.text_field :title, class: 'form-control'
+    .field.form-group
+      = f.text_area :description, id: "eg-textarea", class: "text-small", row: 10
+    .field.form-group
+      = label_tag :tags, 'Tags', class: 'control-label col-sm-1'
+      .col-sm-7
+        = text_field_tag :tags, get_formatted_tags(@post.tags), class: 'form-control'
+    .field.form-group
+      = f.submit 'Save', class: 'btn btn-primary pull-right'
