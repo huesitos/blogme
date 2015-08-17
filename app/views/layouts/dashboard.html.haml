@@ -15,7 +15,7 @@
           = link_to "New author", new_dashboard_author_path
         = link_to "Log out", dashboard_log_out_path, method: :delete
 
-    .main.col-sm-9
+    %div{class: controller.controller_name != 'session' ? 'main col-sm-9' : 'main'}
       %ul.flashes
         - flash.each do |name, msg|
           %div{class: "alert alert-dimissible alert-#{name}"}

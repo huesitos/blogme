@@ -1,11 +1,13 @@
-%h2 Login
-
 = form_tag(dashboard_log_in_path, method: :create) do
-  .field
-    = label_tag('Email:')
-    = text_field_tag('email')
-  .field
-    = label_tag('Password:')
-    = text_field_tag('password')
-  .field
-    = submit_tag 'Log in'
+  %h2 Login
+  .form-horizontal
+    .field.form-group
+      = label_tag(:email, 'Email:', {class: 'control-label col-sm-3'})
+      .col-sm-9
+        = text_field_tag(:email, '', class: 'form-control')
+    .field.form-group
+      = label_tag(:password, "Password:", {class: 'control-label col-sm-3'})
+      .col-sm-9
+        = password_field_tag(:password, '', class: 'form-control')
+    .field.form-group
+      = submit_tag 'Log in', class: 'btn btn-primary pull-right'

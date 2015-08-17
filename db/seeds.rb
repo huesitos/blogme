@@ -16,12 +16,14 @@ FactoryGirl.create(:post).tags << [tag2, tag3]
 
 Post.all.each { |p| denisse.posts << p }
 
-nicole = FactoryGirl.create(:author,
+nicole = Author.create(
   name: "Nicole Margarita",
   last_name: "Lara Martin",
   email: 'nicolelaramartin@gmail.com',
   nickname: 'nicole',
-  role: 'editor')
+  role: 'editor',
+  password: '123456',
+  image: 'https://lh3.googleusercontent.com/-f-cGH3EJEac/AAAAAAAAAAI/AAAAAAAAGFE/LQyCnWjEvTU/s120-c/photo.jpg')
 
 tag5 = FactoryGirl.create(:tag, name: 'art')
 
