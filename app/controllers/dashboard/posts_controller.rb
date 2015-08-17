@@ -21,7 +21,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
     end
 
     @tags_with_frequency = @tags.map do |tag|
-      [tag, tag.posts.length]
+      [tag.name, tag.posts.length]
     end
   end
 

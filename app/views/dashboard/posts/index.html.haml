@@ -1,8 +1,11 @@
 %h2 Posts
 
-= render @posts
-
-%ul
+%h3 Tags
+%ul.tags
   - @tags_with_frequency.each do |tag_f|
-    =render tag_f[0]
-    %span=tag_f[1]
+    .tag
+      %a{href: "#{dashboard_posts_path(tag: tag_f[0])}"}
+        =tag_f[0]
+        %span=tag_f[1]
+
+= render @posts

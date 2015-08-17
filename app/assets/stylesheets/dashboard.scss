@@ -1,6 +1,12 @@
 #dashboard {
   padding: 3em 0;
 
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
   .menu {
     min-width: 20%;
 
@@ -11,7 +17,24 @@
 
       &:hover {
         background-color: #eee;
-        text-decoration: none;
+      }
+    }
+  }
+
+  .tags {
+    list-style: none;
+    padding: 0;
+
+    .tag {
+      display: inline-block;
+      background-color: #eee;
+      border-radius: 5px;
+      padding: 5px;
+
+      a {
+        span {
+          color: #333;
+        }
       }
     }
   }
