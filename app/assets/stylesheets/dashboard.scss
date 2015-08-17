@@ -1,5 +1,18 @@
 #dashboard {
+  padding: 3em 0;
 
   .menu {
+    min-width: 20%;
+
+    a {
+      padding: 1em 2em;
+      display: block;
+      text-align: right;
+
+      &:hover {
+        background-color: #eee;
+        text-decoration: none;
+      }
+    }
   }
 }
