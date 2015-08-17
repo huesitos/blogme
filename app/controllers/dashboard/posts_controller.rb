@@ -23,6 +23,10 @@ class Dashboard::PostsController < Dashboard::DashboardController
     @tags_with_frequency = @tags.map do |tag|
       [tag.name, tag.posts.length]
     end
+
+    @authors_with_frequency = Author.all.map do |author|
+      [author.nickname, author.posts.length]
+    end
   end
 
   def show
