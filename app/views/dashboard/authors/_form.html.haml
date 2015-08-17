@@ -3,10 +3,11 @@
 .col-sm-9
   = form_for @author, url: @url do |f|
     - if not @author.errors.empty?
-      %h4="Couldn't create the author because of #{pluralize(@author.errors.count, 'error')}."
-      %ul
-        - @author.errors.full_messages.each do |error|
-          %li= error
+      #error-explanation.alert.alert-danger
+        %ul
+          %strong="Couldn't create the author because of #{pluralize(@author.errors.count, 'error')}."
+          - @author.errors.full_messages.each do |error|
+            %li= error
 
     .form-horizontal
       .field.form-group

@@ -2,10 +2,11 @@
 
 = form_for @post, url: @url do |f|
   - if not @post.errors.empty?
-    %h4="Couldn't create the post because of #{pluralize(@post.errors.count, 'error')}."
-    %ul
-      - @post.errors.full_messages.each do |error|
-        %li= error
+    #error-explanation.alert.alert-danger
+      %strong="Couldn't create the post because of #{pluralize(@post.errors.count, 'error')}."
+      %ul
+        - @post.errors.full_messages.each do |error|
+          %li= error
 
   .form-horizontal
     .field.form-group
@@ -13,7 +14,7 @@
       .col-sm-7
         = f.text_field :title, class: 'form-control'
     .field.form-group
-      = f.text_area :description, id: "eg-textarea", class: "text-small", row: 10
+      = f.text_area :description, id: "eg-textarea", class: "text-small"
     .field.form-group
       = label_tag :tags, 'Tags', class: 'control-label col-sm-1'
       .col-sm-7
