@@ -1,0 +1,42 @@
+!!!5
+%html
+  %head
+    %title Blogme
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body{:class => controller.controller_name}
+    .site
+      / Banner
+
+      %section.banner
+
+      / Header
+
+      %header
+        %nav
+          %ul
+            %li= link_to 'Home', home_path, class: 'active'
+            %li= link_to 'Page-1', '#'
+            %li= link_to 'Page-2', '#'
+            %li= link_to 'Page-3', '#'
+
+      / Content
+
+      .content
+        .main-content.col-sm-9
+          = yield
+
+        %aside.sidebar.col-sm-3
+          %h3 Hola
+          .author-profile
+          .tag-cloud
+          .archive
+
+
+      / Footer
+
+      %footer
+        = image_tag('')
+        %p Una frase
+        %p Copyright
