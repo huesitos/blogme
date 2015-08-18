@@ -1,19 +1,31 @@
 .post-full
-  %h2= @post.title
-  %p= @post.created_at.to_time.strftime("%y %^b %d %H:%M:%S")
-  = simple_format(@post.description)
-  %ul
+  %header
+    .date
+      .day
+        %span=@post.created_at.to_date.day
+      .month-year
+        %span=@post.created_at.to_date.strftime('%B')
+        %span=@post.created_at.to_date.year
+    %h4.title= @post.title
+    .info
+      %p.pull-right
+        by
+        = link_to "#{@post.author.name} #{@post.author.last_name}", author_path(@post.author.id)
+  %section.content
+    = simple_format(@post.description)
+
+  %ul.tags
     = render @post.tags
 
-  .comments
-    = render @post.comments
+  %section.comments
+    %h4 Comments
+    = render @comments
 
-  = form_for @comment, url: comments_path(@post.id) do |f|
-    .field
-      = f.label :name
-      = f.text_field :name
-    .field
-      = f.label :content
-      = f.text_area :content
-    .field
-      = f.submit 'Comment'
+    = form_for @comment, url: comments_path(@post.id) do |f|
+      %strong Leave a comment
+      .field
+        = f.text_field :name, {class: 'form-control', placeholder: 'Name'}
+      .field
+        = f.text_area :content, class: 'form-control', placeholder: 'Comment'
+      .field
+        = f.submit 'Comment', class: 'btn btn-primary'

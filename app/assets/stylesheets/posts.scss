@@ -61,14 +61,13 @@
     text-align: center;
   }
 
+  .post-full,
   .post {
     background-color: rgba(white, 0.7);
     padding: 10px;
     margin: 10px 0;
 
     header {
-      .title,
-      .date,
       .month-year,
       .day {
         display: inline-block;
@@ -78,6 +77,7 @@
         padding-right: 15px;
         margin-right: 10px;
         border-right: 2px solid complement($primary-color);
+        float: left;
 
 
         .day {
@@ -98,6 +98,7 @@
         width: 85%;
         margin-right: 0;
         vertical-align: bottom;
+        float: left;
 
         a {
           color: darken($primary-color, 30%);
@@ -113,6 +114,61 @@
       li:hover {
         background-color: lighten(complement($primary-color), 20%);
       }
+    }
+  }
+
+  .post-full {
+    header {
+      .title {
+        text-align: center;
+      }
+      .info {
+        font-size: 80%;
+      }
+    }
+    .content {
+      clear: both;
+      text-align: justify;
+      padding: 15px;
+    }
+    .comments {
+      h4 {
+        text-align: center;
+      }
+      .comment {
+        background-color: white;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 10px 0;
+
+        &:last {
+          border-bottom: none;
+        }
+
+        header {
+          .name {
+            font-weight: bold;
+          }
+          .time {
+            color: #999;
+          }
+        }
+      }
+    }
+    .new_comment {
+      .field {
+        margin-bottom: 10px;
+      }
+      textarea {
+        resize: vertical;
+      }
+    }
+  }
+
+
+  .post {
+    .content {
+      clear: both;
     }
   }
 

@@ -147,3 +147,24 @@ nav ul li {
 footer {
   clear: both;
 }
+
+/* --------------------------------------------------------------------
+   Colors
+-------------------------------------------------------------------- */
+
+/* -- Bootstrap rewrite -- */
+
+@mixin button-color($color) {
+  background-color: $color;
+  border-color: darken($color, 20%);
+}
+
+.btn.btn-primary {
+  @include button-color($primary-color);
+
+  &:active,
+  &:focus,
+  &:hover {
+    @include button-color(darken($primary-color, 20%))
+  }
+}

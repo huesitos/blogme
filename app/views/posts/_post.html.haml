@@ -6,7 +6,11 @@
       .month-year
         %span=post.created_at.to_date.strftime('%B')
         %span=post.created_at.to_date.year
-    %h4.title= link_to post.title, post_path(post.id)
+    - title = post.title.split(' ')
+    - title.length > 11 ? extra = '...' : extra = ''
+    - title = title.slice(0, 11).join(' ') + extra
+
+    %h4.title= link_to "#{title+extra}", post_path(post.id)
   %section.content
     =link_to "by #{post.author.nickname}", author_path(post.author.nickname)
     - description = post.description.split('</p>').join(' ')
