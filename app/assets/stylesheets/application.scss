@@ -35,6 +35,7 @@ strong { font-weight: bold; }
 @import "posts";
 @import "session";
 @import "dashboard";
+@import "variables";
 @import "froala_editor.min.css";
 @import 'font-awesome';
 @import "bootstrap-sprockets";
@@ -51,39 +52,39 @@ html {
   font-size: 16px;
 }
 body {
-  color: #2E3A38;
+  color: $neutral-color;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: url(asset-path('skulls.png'));
 }
 
 /* ---- Typogragphy ---- */
 
+h1, h2, h3, h4,
+nav ul li a {
+  font-family: $title-font-family;
+}
+
 h1 {
-  font-family: BebasNeueRegular;
   font-size: 4.375em; /* 70px/16px */
   line-height: 40px;
 }
 h2 {
-  font-family: BebasNeueRegular;
   font-size: 3.125em; /* 50px/16px */
 }
 h3 {
-  font-family: BebasNeueRegular;
   font-size: 2.5em; /* 40px/16px */
 }
 h4 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 1.25em; /* 20px/16px */
 }
 a {
-  color: #993299;
+  color: $primary-color;
+  &:active,
   &:hover {
-    color: darken(#993299, 20%);
+    color: darken($primary-color, 20%);
     text-decoration: none;
   }
-}
-nav ul li a {
-  font-family: BebasNeueRegular;
 }
 
 /* --------------------------------------------------------------------

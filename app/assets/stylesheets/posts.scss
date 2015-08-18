@@ -1,3 +1,5 @@
+@import "variables";
+
 @mixin simple-filter($class, $bcolor) {
   list-style: none;
   padding: 0;
@@ -6,15 +8,19 @@
     display: inline-block;
     background-color: $bcolor;
     border-radius: 5px;
-    padding: 5px;
 
     a {
+      padding: 5px;
       span {
         color: #333;
       }
     }
   }
 }
+
+/* --------------------------------------------------------------------
+   Dashboard layout
+-------------------------------------------------------------------- */
 
 #dashboard.posts {
   .thumbnail {
@@ -43,5 +49,71 @@
 
   .froala-wrapper.f-basic {
     min-height: 400px;
+  }
+}
+
+/* --------------------------------------------------------------------
+   Application layout
+-------------------------------------------------------------------- */
+
+#application.posts {
+  h3 {
+    text-align: center;
+  }
+
+  .post {
+    background-color: rgba(white, 0.7);
+    padding: 10px;
+    margin: 10px;
+
+    header {
+      .title,
+      .date,
+      .month-year,
+      .day {
+        display: inline-block;
+      }
+      .date {
+        font-family: $title-font-family;
+        padding-right: 15px;
+        margin-right: 10px;
+        height: 100%;
+        border-right: 2px solid complement($primary-color);
+
+
+        .day {
+          font-size: 2.5em;
+          padding: 0 5px;
+          color: $primary-color;
+        }
+        .month-year {
+          vertical-align: sub;
+          text-align: center;
+
+          span {
+            display: block;
+          }
+        }
+      }
+      .title {
+        width: 85%;
+        margin-right: 0;
+        vertical-align: bottom;
+
+        a {
+          color: darken($primary-color, 30%);
+        }
+      }
+    }
+
+    .tags {
+      @include simple-filter(tag, complement($primary-color));
+      a {
+        color: white;
+      }
+      li:hover {
+        background-color: lighten(complement($primary-color), 20%);
+      }
+    }
   }
 }

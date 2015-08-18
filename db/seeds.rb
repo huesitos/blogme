@@ -10,9 +10,9 @@ tag4 = FactoryGirl.create(:tag, name: 'life')
 
 denisse = FactoryGirl.create(:author, role: 'admin')
 
-FactoryGirl.create(:post).tags << [tag1, tag2]
-FactoryGirl.create(:post).tags << [tag3, tag4]
 FactoryGirl.create(:post).tags << [tag2, tag3]
+FactoryGirl.create(:post, created_at: Date.yesterday).tags << [tag1, tag2]
+FactoryGirl.create(:post, created_at: Date.yesterday - 1).tags << [tag3, tag4]
 
 Post.all.each { |p| denisse.posts << p }
 
@@ -27,11 +27,11 @@ nicole = Author.create(
 
 tag5 = FactoryGirl.create(:tag, name: 'art')
 
-p1 = FactoryGirl.create(:post)
+p1 = FactoryGirl.create(:post, created_at: 3.days.ago)
 p1.tags << tag5
-p2 = FactoryGirl.create(:post)
+p2 = FactoryGirl.create(:post, created_at: 4.days.ago)
 p2.tags << [tag5, tag4]
-p3 = FactoryGirl.create(:post)
+p3 = FactoryGirl.create(:post, created_at: 5.days.ago)
 p3.tags << tag5
 
 nicole.posts << [p1, p2, p3]

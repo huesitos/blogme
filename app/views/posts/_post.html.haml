@@ -1,12 +1,19 @@
 .post
-  %p=post.created_at.to_date.strftime("%y %^b %d")
-  %h3 Title
-  %p=post.title
-  %h3 Description
-  - description = post.description.split('</p>').join(' ')
-  = strip_tags(description).split(' ').slice(0, 10).join(' ')
+  %header
+    .date
+      .day
+        %span=post.created_at.to_date.day
+      .month-year
+        %span=post.created_at.to_date.strftime('%^b')
+        %span=post.created_at.to_date.year
+    %h4.title= link_to post.title, post_path(post.id)
+  %section.content
+    =link_to "by #{post.author.nickname}", author_path(post.author.nickname)
+    - description = post.description.split('</p>').join(' ')
+    - description = strip_tags(description).split(' ')
+    - description.length > 30 ? extra = '...' : extra = ''
+    %p= description.slice(0, 30).join(' ') + extra
 
-  =link_to post.author.nickname, author_path(post.author.nickname)
-  %ul
+  %ul.tags
     = render post.tags
-  = link_to 'Show', post_path(post.id)
+
