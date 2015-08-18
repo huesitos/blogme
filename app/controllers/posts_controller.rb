@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :popular_posts
+
   def index
     if params[:tag]
       @posts = Tag.find_by(name: params[:tag]).posts
@@ -10,6 +12,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post.increment!(:view_count)
     @comment = Comment.new(name: '')
     @comments = @post.comments.order(created_at: :desc)
     @author = @post.author

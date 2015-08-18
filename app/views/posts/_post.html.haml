@@ -7,16 +7,16 @@
         %span=post.created_at.to_date.strftime('%B')
         %span=post.created_at.to_date.year
     - title = post.title.split(' ')
-    - title.length > 11 ? extra = '...' : extra = ''
-    - title = title.slice(0, 11).join(' ') + extra
+    - title.length > @words_title ? extra = '...' : extra = ''
+    - title = title.slice(0, @words_title).join(' ') + extra
 
     %h4.title= link_to "#{title+extra}", post_path(post.id)
   %section.content
     =link_to "by #{post.author.nickname}", author_path(post.author.nickname)
     - description = post.description.split('</p>').join(' ')
     - description = strip_tags(description).split(' ')
-    - description.length > @word_count ? extra = '...' : extra = ''
-    %p= description.slice(0, @word_count).join(' ') + extra
+    - description.length > @words_content ? extra = '...' : extra = ''
+    %p= description.slice(0, @words_content).join(' ') + extra
 
   %ul.tags
     = render post.tags

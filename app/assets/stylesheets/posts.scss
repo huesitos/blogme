@@ -56,7 +56,7 @@
    Application layout
 -------------------------------------------------------------------- */
 
-#application.posts {
+#application.posts, #application.authors {
   h3 {
     text-align: center;
   }
@@ -132,12 +132,16 @@
       padding: 15px;
     }
     .comments {
+      background-color: #fcebfa;
+      padding: 20px;
+
       h4 {
         text-align: center;
       }
       .comment {
+        background-color: white;
         padding: 15px;
-        border-bottom: 1px solid #ddd;
+        border-radius: 5px;
         margin: 10px 0;
 
         &:last {

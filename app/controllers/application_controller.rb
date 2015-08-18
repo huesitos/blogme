@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
         @current_author = nil
       end
     end
+
+    def popular_posts
+      @popular_posts = Post.all.order(view_count: :desc).limit(5)
+    end
 end

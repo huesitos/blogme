@@ -33,16 +33,19 @@
             .author-profile
               %h4 Author
               = image_tag(@author.image)
-              %strong="#{@author.name} #{@author.last_name}"
+              %strong
+                =link_to "#{@author.name} #{@author.last_name}", author_path(nickname: @author.nickname)
               %p.message=@author.message
+
+          %ol.popular-posts
+            %h4 Popular posts
+            -@popular_posts.each do |pp|
+              %li=link_to pp.title, post_path(pp.id)
           / TODO
-          / .popular-posts
           / .suscribe-form
           / .archive
 
       / Footer
 
       %footer
-        = image_tag('')
         %p Una frase
-        %p Copyright
