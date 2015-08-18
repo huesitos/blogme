@@ -15,7 +15,7 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
   end
 
   def create
-    author_params[:nickname].downcase!
+    author_params[:nickname].downcase! if author_params[:nickname]
     @author = Author.new(author_params)
 
     respond_to do |format|
