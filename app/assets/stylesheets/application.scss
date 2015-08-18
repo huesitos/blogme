@@ -102,6 +102,7 @@ a {
 
 .main-content {
   padding: 0;
+  min-height: 900px;
 }
 
 /* Navigation */
@@ -109,7 +110,7 @@ a {
 nav {
   height: 45px;
   padding: 10px 0;
-  background-color: $content-bg-color;
+  background-color: $secondary-color;
   max-width: 1300px;
   width: 100%;
   text-align: center;

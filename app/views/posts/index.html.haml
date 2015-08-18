@@ -2,14 +2,16 @@
 
 - @words_content = 30
 - @words_title = 20
-- pa = @posts.to_a
-= render pa.shift
 
-- @words_content = 10
-- @words_title = 11
-- pa.each do |p|
-  .half-size
-    = render p
+- if not @posts.empty?
+  - pa = @posts.to_a
+  = render pa.shift
+
+  - @words_content = 10
+  - @words_title = 11
+  - pa.each do |p|
+    .half-size
+      = render p
 
 
 
