@@ -110,7 +110,6 @@ a {
 nav {
   height: 45px;
   padding: 10px 0;
-  background-color: $secondary-color;
   max-width: 1300px;
   width: 100%;
   text-align: center;
@@ -206,4 +205,8 @@ footer {
 
 .sidebar {
   background-color: white;
+}
+
+nav.pages-menu {
+  background-color: $secondary-color;
 }
