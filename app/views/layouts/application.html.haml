@@ -28,12 +28,18 @@
         .main-content.col-sm-9
           = yield
 
-        %aside.sidebar.col-sm-3
-          %h3 Hola
-          .author-profile
+        %aside.sidebar
+          - if @author
+            .author-profile
+              %h4 Author
+              = image_tag(@author.image)
+              %strong="#{@author.name} #{@author.last_name}"
+              %p.message=@author.message
+          / TODO
+          / .popular-posts
+          / .suscribe-form
+          / .archive
           .tag-cloud
-          .archive
-
 
       / Footer
 

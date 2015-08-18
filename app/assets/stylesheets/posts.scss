@@ -63,7 +63,7 @@
 
   .post-full,
   .post {
-    background-color: rgba(white, 0.7);
+    background-color: $content-bg-color;
     padding: 10px;
     margin: 10px 0;
 
@@ -165,8 +165,10 @@
     }
   }
 
-
   .post {
+    header .title a:hover {
+      color: darken($primary-color, 20%);
+    }
     .content {
       clear: both;
     }
