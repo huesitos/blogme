@@ -64,7 +64,7 @@
   .post {
     background-color: rgba(white, 0.7);
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
 
     header {
       .title,
@@ -77,7 +77,6 @@
         font-family: $title-font-family;
         padding-right: 15px;
         margin-right: 10px;
-        height: 100%;
         border-right: 2px solid complement($primary-color);
 
 
@@ -114,6 +113,29 @@
       li:hover {
         background-color: lighten(complement($primary-color), 20%);
       }
+    }
+  }
+
+  .half-size {
+    width: 49.6%;
+    display: inline-block;
+    font-size: 75%;
+
+    .post {
+      .date {
+        font-size: 80%;
+        padding-right: 10px;
+        margin-right: 5px;
+      }
+
+      .title {
+        width: 80%;
+        margin: 3px 0;
+      }
+    }
+
+    &:nth(1) {
+      margin-right: 5px;
     }
   }
 }

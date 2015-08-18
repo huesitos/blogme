@@ -1,4 +1,13 @@
 %h3 Posts
 
-= render @posts
+- @word_count = 30
+- pa = @posts.to_a
+= render pa.shift
+
+- @word_count = 10
+- pa.each do |p|
+  .half-size
+    = render p
+
+
 
