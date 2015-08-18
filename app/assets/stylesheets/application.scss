@@ -54,7 +54,6 @@ html {
 body {
   color: $neutral-color;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: url(asset-path('skulls.png'));
 }
 
 /* ---- Typogragphy ---- */
@@ -110,7 +109,7 @@ a {
 nav {
   height: 45px;
   padding: 10px 0;
-  background-color: rgba(white, 0.7);
+  background-color: $content-bg-color;
   max-width: 1300px;
   width: 100%;
   text-align: center;
@@ -191,7 +190,5 @@ footer {
 }
 
 .sidebar {
-  .author-profile{
-    background-color: $content-bg-color;
-  }
+  background-color: white;
 }
