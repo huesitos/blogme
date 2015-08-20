@@ -12,6 +12,7 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
 
   def edit
     @author = Author.find(params[:id])
+    @social_links = @author.social_links
   end
 
   def create
@@ -33,7 +34,21 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
 
     respond_to do |format|
       if @author.update(author_params)
-        flash[:success] = "Author #{@author.email} was updated."
+        flash[:success] = "Author #{@author.nickname} was updated."
+        format.html { redirect_to dashboard_authors_path }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
+  def update_social_links
+    @author = Author.find(params[:author_id])
+    social_links = params[:social_links]
+
+    respond_to do |format|
+      if @author.update(social_links: social_links)
+        flash[:success] = "Author #{@author.nickname} was updated."
         format.html { redirect_to dashboard_authors_path }
       else
         format.html { render :edit }

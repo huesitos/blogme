@@ -9,6 +9,8 @@ tag3 = FactoryGirl.create(:tag, name: 'health')
 tag4 = FactoryGirl.create(:tag, name: 'life')
 
 denisse = FactoryGirl.create(:author, role: 'admin')
+denisse.social_links[:google] = "https://plus.google.com/u/0/+DenisseMargaritaLaraMart%C3%ADn/about"
+denisse.save
 
 FactoryGirl.create(:post).tags << [tag2, tag3]
 FactoryGirl.create(:post, created_at: Date.yesterday).tags << [tag1, tag2]

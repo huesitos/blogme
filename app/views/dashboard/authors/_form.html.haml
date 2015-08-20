@@ -1,42 +1,75 @@
 - @author.id ? @url = dashboard_author_path(@author.id) : @url = dashboard_authors_path
 
 .col-sm-9
-  = form_for @author, url: @url do |f|
-    - if not @author.errors.empty?
-      #error-explanation.alert.alert-danger
-        %ul
-          %strong="Couldn't create the author because of #{pluralize(@author.errors.count, 'error')}."
-          - @author.errors.full_messages.each do |error|
-            %li= error
+  .row
+    - if @author.id
+      %h3 Profile
 
-    .form-horizontal
-      .field.form-group
-        = f.label :name, class: 'control-form col-sm-2'
-        .col-sm-10
-          = f.text_field :name, class: 'form-control'
-      .field.form-group
-        = f.label :last_name, class: 'control-form col-sm-2'
-        .col-sm-10
-          = f.text_field :last_name, class: 'form-control'
-      .field.form-group
-        = f.label :nickname, class: 'control-form col-sm-2'
-        .col-sm-10
-          = f.text_field :nickname, class: 'form-control'
-      .field.form-group
-        = f.label :email, class: 'control-form col-sm-2'
-        .col-sm-10
-          = f.text_field :email, class: 'form-control'
-      .field.form-group
-        = f.label :image, 'Image url', class: 'control-form col-sm-2'
-        .col-sm-10
-          = f.text_field :image, class: 'form-control'
-      .field.form-group
-        = f.label :message, class: 'control-form col-sm-2'
-        .col-sm-10
-          = f.text_area :message, class: 'form-control'
-      .field.form-group
-        = f.label :password, class: 'control-form col-sm-2'
-        .col-sm-10
-          = f.text_field :password, class: 'form-control'
-      .field.form-group
-        = f.submit 'Save', class: 'btn btn-primary pull-right'
+    = form_for @author, url: @url do |f|
+      - if not @author.errors.empty?
+        #error-explanation.alert.alert-danger
+          %ul
+            %strong="Couldn't create the author because of #{pluralize(@author.errors.count, 'error')}."
+            - @author.errors.full_messages.each do |error|
+              %li= error
+
+      .form-horizontal
+        .field.form-group
+          = f.label :name, class: 'control-form col-sm-2'
+          .col-sm-10
+            = f.text_field :name, class: 'form-control'
+        .field.form-group
+          = f.label :last_name, class: 'control-form col-sm-2'
+          .col-sm-10
+            = f.text_field :last_name, class: 'form-control'
+        .field.form-group
+          = f.label :nickname, class: 'control-form col-sm-2'
+          .col-sm-10
+            = f.text_field :nickname, class: 'form-control'
+        .field.form-group
+          = f.label :email, class: 'control-form col-sm-2'
+          .col-sm-10
+            = f.text_field :email, class: 'form-control'
+        .field.form-group
+          = f.label :image, 'Image url', class: 'control-form col-sm-2'
+          .col-sm-10
+            = f.text_field :image, class: 'form-control'
+        .field.form-group
+          = f.label :message, class: 'control-form col-sm-2'
+          .col-sm-10
+            = f.text_area :message, class: 'form-control'
+        .field.form-group
+          = f.label :password, class: 'control-form col-sm-2'
+          .col-sm-10
+            = f.text_field :password, class: 'form-control'
+        .field.form-group
+          = f.submit 'Save', class: 'btn btn-primary pull-right'
+
+  - if @author.id
+    .row
+      %h3 Social links
+      = form_tag(dashboard_author_social_links_path(@author.id), method: "patch",) do |f|
+
+        .form-horizontal
+          .field.form-group
+            = label_tag 'google', 'Google+', class: 'control-form col-sm-2'
+            .col-sm-10
+              = text_field_tag('social_links[google]', @author.social_links[:google], {class: 'form-control'})
+          .field.form-group
+            = label_tag 'youtube', 'Youtube', class: 'control-form col-sm-2'
+            .col-sm-10
+              = text_field_tag('social_links[youtube]', @author.social_links[:youtube], {class: 'form-control'})
+          .field.form-group
+            = label_tag 'pinterest', 'Pinterest', class: 'control-form col-sm-2'
+            .col-sm-10
+              = text_field_tag('social_links[pinterest]', @author.social_links[:pinterest], {class: 'form-control'})
+          .field.form-group
+            = label_tag 'instagram', 'Instagram', class: 'control-form col-sm-2'
+            .col-sm-10
+              = text_field_tag('social_links[instagram]', @author.social_links[:instagram], {class: 'form-control'})
+          .field.form-group
+            = label_tag 'etsy', 'Etsy', class: 'control-form col-sm-2'
+            .col-sm-10
+              = text_field_tag('social_links[etsy]', @author.social_links[:etsy], {class: 'form-control'})
+          .field.form-group
+            = submit_tag 'Save', class: 'btn btn-primary pull-right'
