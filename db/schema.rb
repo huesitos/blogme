@@ -11,23 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818191817) do
+ActiveRecord::Schema.define(version: 20150814185843) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
     t.string   "last_name"
+    t.string   "nickname"
     t.string   "email"
+    t.string   "password_digest"
     t.string   "image"
     t.string   "message"
+    t.string   "role",            default: "editor"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.string   "password_digest"
-    t.string   "nickname"
-    t.string   "role",            default: "editor"
   end
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true
-  add_index "authors", ["nickname"], name: "index_authors_on_nickname", unique: true
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -42,10 +41,10 @@ ActiveRecord::Schema.define(version: 20150818191817) do
   create_table "posts", force: :cascade do |t|
     t.text     "title"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "view_count",  default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "author_id"
-    t.integer  "view_count"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id"

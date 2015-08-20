@@ -3,6 +3,7 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
       t.text :title
       t.text :description
+      t.integer :view_count, default: 0
 
       t.timestamps null: false
     end

@@ -3,11 +3,12 @@ class CreateAuthors < ActiveRecord::Migration
     create_table :authors do |t|
       t.string :name
       t.string :last_name
+      t.string :nickname
       t.string :email
-      t.string :password_hash
-      t.string :password_salt
+      t.string :password_digest
       t.string :image
       t.string :message
+      t.string :role, default: 'editor'
 
       t.timestamps null: false
     end
