@@ -31,11 +31,11 @@ strong { font-weight: bold; }
    Imports
 -------------------------------------------------------------------- */
 
+
 @import "tags";
 @import "posts";
 @import "session";
 @import "dashboard";
-@import "variables";
 @import "froala_editor.min.css";
 @import 'font-awesome';
 @import "bootstrap-sprockets";
@@ -186,27 +186,6 @@ footer {
 /* --------------------------------------------------------------------
    Colors
 -------------------------------------------------------------------- */
-
-/* -- Bootstrap rewrite -- */
-
-@mixin button-color($color) {
-  background-color: $color;
-  border-color: darken($color, 20%);
-}
-
-.btn.btn-primary {
-  @include button-color($primary-color);
-
-  &:active,
-  &:focus,
-  &:hover {
-    @include button-color(darken($primary-color, 20%))
-  }
-}
-
-.sidebar {
-  background-color: white;
-}
 
 nav.pages-menu {
   background-color: $secondary-color;

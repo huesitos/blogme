@@ -1,22 +1,26 @@
-%h2 Posts
+.container
+  .row
+    %h2 Posts
 
-%h3 Filter by
+  .row
+    %h3 Filter by
 
-%h4 Tags
-%ul.tags
-  - @tags_with_frequency.each do |tag_f|
-    .tag
-      %a{href: "#{dashboard_posts_path(tag: tag_f[0])}"}
-        =tag_f[0]
-        %span=tag_f[1]
+    %h4 Tags
+    %ul.tags
+      - @tags_with_frequency.each do |tag_f|
+        .tag
+          %a{href: "#{dashboard_posts_path(tag: tag_f[0])}"}
+            =tag_f[0]
+            %span.badge=tag_f[1]
 
-%h4 Authors
-%ul.authors
-  - @authors_with_frequency.each do |aut_f|
-    .author
-      %a{href: "#{dashboard_posts_path(nickname: aut_f[0])}"}
-        =aut_f[0]
-        %span=aut_f[1]
+    %h4 Authors
+    %ul.authors
+      - @authors_with_frequency.each do |aut_f|
+        .author
+          %a{href: "#{dashboard_posts_path(nickname: aut_f[0])}"}
+            =aut_f[0]
+            %span.badge=aut_f[1]
 
-#posts
-  = render @posts
+  .row
+    #posts
+      = render @posts

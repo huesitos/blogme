@@ -6,21 +6,42 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body{:id => "dashboard", :class => controller.controller_name}
+    / Main navbar
 
-    -if current_author
-      %nav.menu.col-sm-2
-        = link_to "Posts", dashboard_posts_path
-        = link_to "New post", new_dashboard_post_path
-        - if current_author.role == "admin"
-          = link_to "Authors", dashboard_authors_path
-          = link_to "New author", new_dashboard_author_path
-        = link_to "Log out", dashboard_log_out_path, method: :delete
+    - if current_author
+      .navbar.navbar-default.navbar-fixed-top
+        .container
+          .navbar-header
+            = link_to 'Blogme', dashboard_posts_path, class: 'navbar-brand'
+            %button.navbar-toggle.collapsed{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+          %ul.nav.navbar-nav.navbar-right.collapse.navbar-collapse
+            %li= link_to "Posts", dashboard_posts_path
+            - if current_author.role == "admin"
+              %li= link_to "Authors", dashboard_authors_path
+            %li= link_to "Log out", dashboard_log_out_path, method: :delete
 
-    %section{class: controller.controller_name != 'session' ? 'main col-sm-9' : 'main'}
-      %ul.flashes
-        - flash.each do |name, msg|
-          %div{class: "alert alert-dimissible alert-#{name}"}
-            %button{type: "button", class: "close", 'data-dismiss': "alert", 'aria-label': "Close"}
-              %span{'aria-hidden': true} &times;
-            = content_tag :li, msg
-      = yield
+      / Secondary nav
+      .container.sub-menu
+        %ul.nav.nav-pills.nav-defaul
+          - if controller.controller_name == 'posts'
+            %li= link_to "New post", new_dashboard_post_path
+          - if controller.controller_name == 'authors'
+            - if current_author.role == "admin"
+              %li= link_to "New author", new_dashboard_author_path
+
+    / Content
+    .container
+      %section{class: controller.controller_name != 'session' ? 'main col-sm-12' : 'main'}
+        .row
+          %ul.flashes
+            - flash.each do |name, msg|
+              %div{class: "alert alert-dimissible alert-#{name}"}
+                %button{type: "button", class: "close", 'data-dismiss': "alert", 'aria-label': "Close"}
+                  %span{'aria-hidden': true} &times;
+                = content_tag :li, msg
+        .row
+          = yield

@@ -2,7 +2,7 @@
   %h2= @post.title
   %p= @post.created_at.to_time.strftime("%y %^b %d %H:%M:%S")
   = render inline: @post.description
-  %ul
+  %ul.tags
     = render @post.tags
   .comments
     = render @post.comments

@@ -1,4 +1,5 @@
-.comment
-  %p=comment.name
-  %p=comment.content
-  = link_to 'Destroy', dashboard_comment_path(comment.id), method: :delete
+.comment.panel.panel-default
+  .panel-body
+    %strong=comment.name
+    %p=comment.content
+    = link_to 'Destroy', dashboard_comment_path(comment.id), class: 'btn btn-danger', method: :delete

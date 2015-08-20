@@ -1,6 +1,8 @@
 #dashboard {
-  padding: 3em 0;
-  background: #fefefe;
+  .sub-menu {
+    margin-top: 55px;
+    border-bottom: 1px solid #e8e8e8;
+  }
 
   .flashes {
     list-style: none;
@@ -14,22 +16,15 @@
     }
   }
 
-  h2 span {
-    color: #555;
+  /* -- Bootstrap rewrite -- */
+
+  .navbar li a:hover {
+    background-color: #999;
+    color: #fff;
   }
 
-  .menu {
-    background-color: none;
-
-    a {
-      padding: 1em 2em;
-      display: block;
-      text-align: right;
-
-      &:hover {
-        background-color: #eee;
-      }
-    }
+  h2 span {
+    color: #555;
   }
 
   .main {
