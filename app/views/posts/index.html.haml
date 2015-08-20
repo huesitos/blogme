@@ -1,4 +1,6 @@
-%h3 Posts
+%h3
+  = "#{@author.nickname}'s" if @author
+  Posts
 
 - @words_content = 30
 - @words_title = 20
