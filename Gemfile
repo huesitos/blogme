@@ -24,6 +24,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'sqlite3'
+  gem 'image_suckr'
   gem 'rubocop'
 end
 
