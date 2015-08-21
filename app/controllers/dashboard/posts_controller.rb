@@ -5,8 +5,10 @@ class Dashboard::PostsController < Dashboard::DashboardController
     if params[:tag]
       @posts = Tag.find_by(name: params[:tag]).posts
     else
-      @posts = Post.all
+      @posts ||= Post.all.order(created_at: :desc)
     end
+
+    @posts = @posts.order(created_at: :desc)
 
     if current_author.role != "admin"
       @posts = @posts.where(author_id: current_author.id)
@@ -17,7 +19,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
         @posts = Author.find_by(nickname: params[:nickname]).posts
       end
 
-      @tags = Tag.all
+      @tags ||= Tag.all
     end
 
     @tags_with_frequency = @tags.map do |tag|
@@ -103,7 +105,7 @@ class Dashboard::PostsController < Dashboard::DashboardController
   private
 
     def post_params
-      params.require(:post).permit(:title, :description)
+      params.require(:post).permit(:title, :description, :preview_image)
     end
 
     def get_tags

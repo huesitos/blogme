@@ -38,6 +38,7 @@
           = f.label :message, class: 'control-form col-sm-2'
           .col-sm-10
             = f.text_area :message, class: 'form-control'
+        / - if not @author.id
         .field.form-group
           = f.label :password, class: 'control-form col-sm-2'
           .col-sm-10
@@ -48,7 +49,7 @@
   - if @author.id
     .row
       %h3 Social links
-      = form_tag(dashboard_author_social_links_path(@author.id), method: "patch",) do |f|
+      = form_tag(dashboard_author_social_links_path(@author.id), method: "patch") do |f|
 
         .form-horizontal
           .field.form-group
@@ -71,5 +72,9 @@
             = label_tag 'etsy', 'Etsy', class: 'control-form col-sm-2'
             .col-sm-10
               = text_field_tag('social_links[etsy]', @author.social_links[:etsy], {class: 'form-control'})
+          .field.form-group
+            = label_tag 'password', 'Password', class: 'control-form col-sm-2'
+            .col-sm-10
+              = text_field_tag 'password', '', class: 'form-control'
           .field.form-group
             = submit_tag 'Save', class: 'btn btn-primary pull-right'

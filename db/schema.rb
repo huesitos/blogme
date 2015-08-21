@@ -41,10 +41,11 @@ ActiveRecord::Schema.define(version: 20150820180927) do
 
   create_table "posts", force: :cascade do |t|
     t.text     "title"
+    t.text     "preview_image"
     t.text     "description"
-    t.integer  "view_count",  default: 0
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "view_count",    default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "author_id"
   end
 
