@@ -1,9 +1,12 @@
 class Dashboard::PostsController < Dashboard::DashboardController
   before_action :authenticate_author!
+  before_action :get_categories, except: [:index, :show, :destroy]
 
   def index
     if params[:tag]
       @posts = Tag.find_by(name: params[:tag]).posts
+    elsif params[:category]
+      @posts = Category.find_by(name: params[:category]).posts
     else
       @posts ||= Post.all.order(created_at: :desc)
     end
@@ -28,6 +31,10 @@ class Dashboard::PostsController < Dashboard::DashboardController
 
     @authors_with_frequency = Author.all.map do |author|
       [author.nickname, author.posts.length]
+    end
+
+    @categories_w_freq = Category.all.map do |category|
+      [category.name, category.posts.length]
     end
   end
 
@@ -105,7 +112,11 @@ class Dashboard::PostsController < Dashboard::DashboardController
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :preview_image)
+      params.require(:post).permit(
+        :title,
+        :description,
+        :preview_image,
+        :category_id)
     end
 
     def get_tags
@@ -124,5 +135,9 @@ class Dashboard::PostsController < Dashboard::DashboardController
 
     def get_formatted_tags(tags)
       tags.map(&:name).join(', ')
+    end
+
+    def get_categories
+      @categories = Category.all.map { |c| [c.name, c.id] }
     end
 end

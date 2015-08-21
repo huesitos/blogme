@@ -5,6 +5,9 @@
       .caption
         %h3=link_to post.title.split(' ').slice(0, 10).join(' ')+'...', dashboard_post_path(post.id)
         %p=post.created_at.to_date.strftime("%d %^b %y")
+        %p
+          %strong Category
+          = link_to post.category.name, dashboard_posts_path(category: post.category.name)
         - description = post.description.split('</p>').join(' ')
         - description = strip_tags(description).split(' ')
         - description.length > 10 ? extra = '...' : extra = ''

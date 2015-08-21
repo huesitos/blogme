@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820180927) do
+ActiveRecord::Schema.define(version: 20150821220850) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(version: 20150820180927) do
   end
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true
+
+  create_table "categories", force: :cascade do |t|
+    t.text     "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -47,9 +53,11 @@ ActiveRecord::Schema.define(version: 20150820180927) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "author_id"
+    t.integer  "category_id"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id"
+  add_index "posts", ["category_id"], name: "index_posts_on_category_id"
 
   create_table "posts_tags", id: false, force: :cascade do |t|
     t.integer "post_id"

@@ -21,6 +21,14 @@
             =aut_f[0]
             %span.badge=aut_f[1]
 
+    %h4 Categories
+    %ul.authors
+      - @categories_w_freq.each do |aut_f|
+        .author
+          %a{href: "#{dashboard_posts_path(category: aut_f[0])}"}
+            =aut_f[0]
+            %span.badge=aut_f[1]
+
   .row
     #posts
       = render @posts

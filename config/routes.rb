@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  namespace :dashboard do
+  get 'categories/new'
+  end
+
+  namespace :dashboard do
+  get 'categories/edit'
+  end
+
   root 'posts#index', as: :home
 
   get 'posts', to: 'posts#index', as: :posts
@@ -13,6 +21,7 @@ Rails.application.routes.draw do
     root 'posts#index', as: :dashboard
 
     resources :posts
+    resources :categories, except: [:show, :new]
     resources :authors, except: [:show] do
       patch 'update_social_links',
         to: 'authors#update_social_links',

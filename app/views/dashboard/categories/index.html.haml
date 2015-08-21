@@ -1,0 +1,8 @@
+%h2 Categories
+
+= render "form"
+
+- @categories.each do |c|
+  %strong=c.name
+  %span= link_to "Edit", edit_dashboard_category_path(c.id), class: 'btn btn-link'
+  %span= link_to "Destroy", dashboard_category_path(c.id), method: :delete, class: 'btn btn-link'

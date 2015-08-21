@@ -9,7 +9,7 @@
       - if not @author.errors.empty?
         #error-explanation.alert.alert-danger
           %ul
-            %strong="Couldn't create the author because of #{pluralize(@author.errors.count, 'error')}."
+            %strong="The following #{pluralize(@author.errors.count, 'error')} prevented the action to be completed"
             - @author.errors.full_messages.each do |error|
               %li= error
 

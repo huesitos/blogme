@@ -22,16 +22,18 @@
             %li= link_to "Posts", dashboard_posts_path
             - if current_author.role == "admin"
               %li= link_to "Authors", dashboard_authors_path
+              %li= link_to "Categories", dashboard_categories_path
             %li= link_to "Log out", dashboard_log_out_path, method: :delete
 
       / Secondary nav
-      .container.sub-menu
-        %ul.nav.nav-pills.nav-defaul
-          - if controller.controller_name == 'posts'
-            %li= link_to "New post", new_dashboard_post_path
-          - if controller.controller_name == 'authors'
-            - if current_author.role == "admin"
-              %li= link_to "New author", new_dashboard_author_path
+      - if ['posts', 'authors'].include? controller.controller_name
+        .container.sub-menu
+          %ul.nav.nav-pills.nav-defaul
+            - if controller.controller_name == 'posts'
+              %li= link_to "New post", new_dashboard_post_path
+            - if controller.controller_name == 'authors'
+              - if current_author.role == "admin"
+                %li= link_to "New author", new_dashboard_author_path
 
     / Content
     .container
