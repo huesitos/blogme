@@ -15,6 +15,9 @@ denisse.save
 FactoryGirl.create(:post).tags << [tag2, tag3]
 FactoryGirl.create(:post, created_at: Date.yesterday).tags << [tag1, tag2]
 FactoryGirl.create(:post, created_at: Date.yesterday - 1).tags << [tag3, tag4]
+FactoryGirl.create(:post, created_at: 1.month.ago).tags << [tag3, tag4]
+FactoryGirl.create(:post, created_at: 2.months.ago).tags << [tag3, tag4]
+FactoryGirl.create(:post, created_at: 1.year.ago).tags << [tag3, tag4]
 
 Post.all.each { |p| denisse.posts << p }
 

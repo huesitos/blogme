@@ -36,9 +36,19 @@
             %h4 Popular posts
             -@popular_posts.each do |pp|
               %li=link_to pp.title, post_path(pp.id)
+          .archive
+            %h4.text-center Archive
+            - @archive.each_pair do |month, posts|
+              %div{class: "#{month.split(' ').join('-')}"}
+                %h5.expand-btn.highlightable
+                  = "#{month}"
+                  %small="(#{posts.length})"
+                  %span.caret
+                %ul.monthly-posts
+                  - posts.each do |post|
+                    %li.hidden= link_to post[0], post_path(id:post[1])
           / TODO
           / .suscribe-form
-          / .archive
 
       / Footer
 

@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :popular_posts
+  before_action :get_archive
 
   def index
     if params[:tag]
