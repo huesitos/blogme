@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < BlogControllerController
 
   def create
     @post = Post.find(params[:post_id])

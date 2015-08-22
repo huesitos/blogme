@@ -1,6 +1,4 @@
-class AuthorsController < ApplicationController
-  before_action :popular_posts
-  before_action :get_archive
+class AuthorsController < BlogControllerController
 
   def show
     @author = Author.find_by(nickname: params[:nickname])

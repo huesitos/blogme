@@ -14,19 +14,4 @@ class ApplicationController < ActionController::Base
         @current_author = nil
       end
     end
-
-    def popular_posts
-      @popular_posts = Post.all.order(view_count: :desc).limit(5)
-    end
-
-    def get_archive
-      @archive = {}
-      Post.all.each do |post|
-        if @archive["#{post.created_at.strftime("%B %Y")}"]
-          @archive["#{post.created_at.strftime("%B %Y")}"] << [post.title, post.id]
-        else
-          @archive["#{post.created_at.strftime("%B %Y")}"] = [[post.title, post.id]]
-        end
-      end
-    end
 end
