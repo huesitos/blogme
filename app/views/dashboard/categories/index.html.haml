@@ -2,7 +2,10 @@
 
 = render "form"
 
-- @categories.each do |c|
-  %strong=c.name
-  %span= link_to "Edit", edit_dashboard_category_path(c.id), class: 'btn btn-link'
-  %span= link_to "Destroy", dashboard_category_path(c.id), method: :delete, class: 'btn btn-link'
+%ul.list-inline
+  - @categories.each do |c|
+    %li
+      .category
+        %strong=c.name
+        %span= link_to "Edit", edit_dashboard_category_path(c.id), class: 'btn btn-primary'
+        %span= link_to "Destroy", dashboard_category_path(c.id), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'

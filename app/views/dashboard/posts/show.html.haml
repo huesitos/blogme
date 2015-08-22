@@ -6,3 +6,7 @@
     = render @post.tags
   .comments
     = render @post.comments
+
+  %div
+    = link_to "Edit", edit_dashboard_post_path(@post.id), class: 'btn btn-primary'
+    = link_to "Destroy", dashboard_post_path(@post.id), method: :delete, data: { confirm: "Are you sure?"}, class: 'btn btn-danger'
