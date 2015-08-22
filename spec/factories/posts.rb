@@ -7,7 +7,9 @@ FactoryGirl.define do
     description Faker::Lorem.paragraph(20)
     preview_image suckr.get_image_url({"q"=>"art"})
 
-    category
+    factory :post_wc do
+      category
+    end
 
     factory :post_wa do
       author

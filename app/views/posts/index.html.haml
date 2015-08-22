@@ -1,5 +1,6 @@
 %h3
   = "#{@author.nickname}'s" if @author
+  = "#{@category.name}" if @category
   Posts
 
 - @words_content = 30

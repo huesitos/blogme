@@ -18,7 +18,7 @@ RSpec.describe TagsController, type: :controller do
 
     it "renders the show template" do
       get :show, tag: @tag.name
-      expect(response).to render_template(:show)
+      expect(response).to render_template("posts/index")
       expect(response.status).to eq(200)
     end
   end

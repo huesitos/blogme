@@ -1,4 +1,5 @@
 class Dashboard::CategoriesController < Dashboard::DashboardController
+  before_action :authenticate_author!
 
   def index
     @categories = Category.all
