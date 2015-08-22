@@ -1,0 +1,11 @@
+.col-sm-6.col-md-4
+  .page.thumbnail
+    .caption
+      %h3.text-center=page.name
+      - content = page.content.split('</p>').join(' ')
+      - content = strip_tags(content).split(' ')
+      - content.length > 10 ? extra = '...' : extra = ''
+      %p= content.slice(0, 50).join(' ') + extra
+      .options
+        = link_to "Edit", edit_dashboard_page_path(page.id), class: 'btn btn-primary'
+        = link_to "Destroy", dashboard_page_path(page.id), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'

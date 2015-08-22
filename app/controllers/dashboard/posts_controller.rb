@@ -1,5 +1,5 @@
 class Dashboard::PostsController < Dashboard::DashboardController
-  before_action :authenticate_author!
+  before_action :authenticate_author
   before_action :get_categories, except: [:index, :show, :destroy]
 
   def index

@@ -5,6 +5,9 @@ Post.destroy_all
 Tag.destroy_all
 Comment.destroy_all
 Category.destroy_all
+Page.destroy_all
+
+page = FactoryGirl.create(:page)
 
 printable = FactoryGirl.create(:category)
 paper_craft = FactoryGirl.create(:category, name: 'Papercraft')

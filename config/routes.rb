@@ -14,12 +14,15 @@ Rails.application.routes.draw do
     root 'posts#index', as: :dashboard
 
     resources :posts
+    resources :pages
     resources :categories, except: [:show, :new]
+
     resources :authors, except: [:show] do
       patch 'update_social_links',
         to: 'authors#update_social_links',
         as: :social_links
     end
+
     get 'tags/:id', to: 'tags#show', as: :tag
     get 'log_in', to: 'session#new', as: :log_in
     post 'log_in', to: 'session#create'

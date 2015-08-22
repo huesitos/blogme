@@ -1,0 +1,19 @@
+- @page.id ? @url = dashboard_page_path(@page.id) : @url = dashboard_pages_path
+
+= form_for @page, url: @url do |f|
+  - if not @page.errors.empty?
+    #error-explanation.alert.alert-danger
+      %strong="The following #{pluralize(@page.errors.count, 'error')} prevented the action to be completed."
+      %ul
+        - @page.errors.full_messages.each do |error|
+          %li= error
+
+  .form-horizontal
+    .field.form-group
+      = f.label :name, class: 'control-label col-sm-1'
+      .col-sm-7
+        = f.text_field :name, class: 'form-control'
+    .field.form-group
+      = f.text_area :content, id: "eg-textarea", class: "text-small"
+    .field.form-group
+      = f.submit 'Save', class: 'btn btn-primary pull-right'

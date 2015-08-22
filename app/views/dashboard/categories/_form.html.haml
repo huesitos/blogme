@@ -8,10 +8,8 @@
         - @category.errors.full_messages.each do |error|
           %li= error
 
-  .form-horizontal
+  .form-inline
     .field.form-group
-      = f.label(:name, 'Name:', {class: 'control-label col-sm-1'})
-      .col-sm-4
-        = f.text_field(:name, class: 'form-control')
-      .field.form-group
-        = f.submit 'Save', class: 'btn btn-primary'
+      = f.label(:name, 'Name:', {class: 'control-label'})
+      = f.text_field(:name, class: 'form-control')
+    = f.submit 'Save', class: 'btn btn-primary'

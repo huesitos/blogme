@@ -31,10 +31,12 @@ strong { font-weight: bold; }
    Imports
 -------------------------------------------------------------------- */
 
-
+@import "variables";
 @import "tags";
 @import "posts";
 @import "session";
+@import "categories";
+@import "pages";
 @import "dashboard";
 @import "froala_editor.min.css";
 @import 'font-awesome';

@@ -1,4 +1,4 @@
-class Dashboard::CommentsController < ApplicationController
+class Dashboard::CommentsController < Dashboard::DashboardController
 
   def destroy
     @comment = Comment.find(params[:id])

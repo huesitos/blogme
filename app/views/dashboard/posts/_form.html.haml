@@ -3,7 +3,7 @@
 = form_for @post, url: @url do |f|
   - if not @post.errors.empty?
     #error-explanation.alert.alert-danger
-      %strong="Couldn't create the post because of #{pluralize(@post.errors.count, 'error')}."
+      %strong="The following #{pluralize(@post.errors.count, 'error')} prevented the action to be completed."
       %ul
         - @post.errors.full_messages.each do |error|
           %li= error

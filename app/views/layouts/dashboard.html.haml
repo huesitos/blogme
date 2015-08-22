@@ -23,10 +23,11 @@
             - if current_author.role == "admin"
               %li= link_to "Authors", dashboard_authors_path
               %li= link_to "Categories", dashboard_categories_path
+              %li= link_to "Pages", dashboard_pages_path
             %li= link_to "Log out", dashboard_log_out_path, method: :delete
 
       / Secondary nav
-      - if ['posts', 'authors'].include? controller.controller_name
+      - if ['posts', 'authors', 'pages'].include? controller.controller_name
         .container.sub-menu
           %ul.nav.nav-pills.nav-defaul
             - if controller.controller_name == 'posts'
@@ -34,6 +35,9 @@
             - if controller.controller_name == 'authors'
               - if current_author.role == "admin"
                 %li= link_to "New author", new_dashboard_author_path
+            - if controller.controller_name == 'pages'
+              - if current_author.role == "admin"
+                %li= link_to "New page", new_dashboard_page_path
 
     / Content
     .container
