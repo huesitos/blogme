@@ -78,10 +78,4 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
         :message,
         :email)
     end
-
-    def authorize_author!
-      if current_author.role != "admin"
-        redirect_to dashboard_posts_path
-      end
-    end
 end

@@ -12,4 +12,10 @@ class Dashboard::DashboardController < ApplicationController
         redirect_to(dashboard_log_in_path)
       end
     end
+
+    def authorize_author!
+      if current_author.role != "admin"
+        redirect_to dashboard_posts_path
+      end
+    end
 end
