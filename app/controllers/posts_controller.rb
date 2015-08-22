@@ -1,4 +1,4 @@
-class PostsController < BlogControllerController
+class PostsController < BlogController
 
   def index
     if params[:tag]

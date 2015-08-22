@@ -1,4 +1,4 @@
-class CategoriesController < BlogControllerController
+class CategoriesController < BlogController
 
   def show
     @category = Category.find_by(name: params[:category])

@@ -1,4 +1,4 @@
-class BlogControllerController < ApplicationController
+class BlogController < ApplicationController
   before_action :popular_posts
   before_action :archive
   before_action :categories

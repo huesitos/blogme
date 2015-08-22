@@ -1,4 +1,4 @@
-class TagsController < BlogControllerController
+class TagsController < BlogController
 
   def show
     @tag = Tag.find_by(name: params[:tag])

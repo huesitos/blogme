@@ -1,4 +1,4 @@
-class AuthorsController < BlogControllerController
+class AuthorsController < BlogController
 
   def show
     @author = Author.find_by(nickname: params[:nickname])
