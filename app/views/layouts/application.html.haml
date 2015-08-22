@@ -21,7 +21,9 @@
             - if @categories
               - @categories.each do |c|
                 %li= link_to c.name, category_path(category: c.name)
-            %li= link_to 'Page-1', home_path
+            - if @categories
+              - @pages.each do |p|
+                %li= link_to p.name, page_path(name: p.name)
 
       / Content
 

@@ -2,6 +2,7 @@ class BlogControllerController < ApplicationController
   before_action :popular_posts
   before_action :archive
   before_action :categories
+  before_action :pages
 
   private
 
@@ -11,6 +12,10 @@ class BlogControllerController < ApplicationController
 
     def categories
       @categories = Category.all
+    end
+
+    def pages
+      @pages = Page.all
     end
 
     def archive

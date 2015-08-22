@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'tags/:tag', to: 'tags#show', as: :tag
   get 'authors/:nickname', to: 'authors#show', as: :author
   get 'categories/:category', to: 'categories#show', as: :category
+  get 'pages/:name', to: "pages#show", as: :page
 
   post 'comments/:post_id', to: 'comments#create', as: :comments
 
