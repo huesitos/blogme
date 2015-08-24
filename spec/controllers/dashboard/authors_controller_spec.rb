@@ -193,10 +193,19 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
 
     it "destroys an author" do
       author_id = author.id
-      delete :destroy, id: author.id
+      expect {
+        delete :destroy, id: author.id
+      }.to change(Author, :count).by(-1)
 
       expect(Author.all.length).to eq 0
       expect(Author.find_by(id: author_id)).to eq nil
+    end
+
+    it "redirect_to the dashboard authors index template" do
+      author_id = author.id
+      delete :destroy, id: author.id
+
+      expect(response).to redirect_to(dashboard_authors_path)
     end
   end
 end
