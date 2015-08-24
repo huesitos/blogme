@@ -7,27 +7,21 @@
     = csrf_meta_tags
     %link{:href => "http://fonts.googleapis.com/css?family=Oswald", :rel => "stylesheet", :type => "text/css"}/
   %body{:id => "application", :class => controller.controller_name}
-    .site
-      / Banner
+    %header.navbar.navbar-fixed-top
+      .container
+        %ul.list-inline
+          %li= link_to 'Home', home_path, class: 'active'
+          - if @categories
+            - @categories.each do |c|
+              %li= link_to c.name, category_path(category: c.name)
+          - if @categories
+            - @pages.each do |p|
+              %li= link_to p.name, page_path(name: p.name)
 
-      %section.banner
+    / Content
 
-      / Header
-
-      %header
-        %nav.pages-menu
-          %ul
-            %li= link_to 'Home', home_path, class: 'active'
-            - if @categories
-              - @categories.each do |c|
-                %li= link_to c.name, category_path(category: c.name)
-            - if @categories
-              - @pages.each do |p|
-                %li= link_to p.name, page_path(name: p.name)
-
-      / Content
-
-      #content
+    #content.container
+      .row
         .main-content.col-sm-9
           = yield
 
@@ -53,7 +47,30 @@
           / TODO
           / .suscribe-form
 
-      / Footer
+    / Footer
 
-      %footer
-        %p Una frase
+    %footer
+      .container
+        .row
+          .col-sm-3
+            %h4 Categories
+            %ul
+            - @categories.each do |c|
+              %li= link_to c.name, category_path(category: c.name)
+          .col-sm-3
+            %h4 Pages
+            %ul
+            - @pages.each do |pa|
+              %li= link_to pa.name, page_path(name: pa.name)
+          .col-sm-3
+            %h4 Recent posts
+            %ul
+              - @recent_posts.each do |po|
+                %li= link_to po.title, post_path(po.id)
+          .col-sm-3
+            %h4 Other links
+        .row
+          .col-sm-6
+            %p Copyright © 2015 Blogme. All rights reserved.
+          .col-sm-6
+            %p Social links

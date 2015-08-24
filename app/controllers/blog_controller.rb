@@ -1,5 +1,6 @@
 class BlogController < ApplicationController
   before_action :popular_posts
+  before_action :recent_posts
   before_action :archive
   before_action :categories
   before_action :pages
@@ -8,6 +9,10 @@ class BlogController < ApplicationController
 
     def popular_posts
       @popular_posts = Post.all.order(view_count: :desc).limit(5)
+    end
+
+    def recent_posts
+      @recent_posts = Post.all.order(created_at: :desc).limit(5)
     end
 
     def categories
