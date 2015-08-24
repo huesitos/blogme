@@ -1,9 +1,15 @@
 #dashboard {
-  margin-top: 55px;
+  /* ---- Typogragphy ---- */
 
-  .sub-menu {
-    border-bottom: 1px solid #e8e8e8;
+  font-size: 1em;
+
+  h1, h2, h3, h4 {
+    font-family: serif;
   }
+
+  /* ---- Layout ---- */
+
+  margin-top: 55px;
 
   .flashes {
     list-style: none;
@@ -17,6 +23,16 @@
     }
   }
 
+  #error-explanation {
+    ul li {
+      margin-left: 1.5em;
+    }
+  }
+
+  .main {
+    margin-bottom: 3em;
+  }
+
   /* -- Bootstrap rewrite -- */
 
   .navbar li a:hover {
@@ -24,17 +40,8 @@
     color: #fff;
   }
 
+  /* -- Colors -- */
   h2 span {
     color: #555;
-  }
-
-  .main {
-    margin-bottom: 3em;
-  }
-
-  #error-explanation {
-    ul li {
-      margin-left: 1.5em;
-    }
   }
 }

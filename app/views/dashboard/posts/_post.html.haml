@@ -15,7 +15,7 @@
 
         - if admin_author?
           = link_to "#{post.author.name} #{post.author.last_name}", dashboard_posts_path(nickname: post.author.nickname)
-        %ul.tags
+        %ul.list-inline
           = render post.tags
         .options
           = link_to 'Edit', edit_dashboard_post_path(post.id), class: 'btn btn-primary'
