@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       patch 'update_social_links',
         to: 'authors#update_social_links',
         as: :social_links
+      patch 'password',
+        to: 'authors#update_password',
+        as: :password
     end
 
     get 'tags/:id', to: 'tags#show', as: :tag

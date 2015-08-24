@@ -38,10 +38,15 @@
           = f.label :message, class: 'control-form col-sm-2'
           .col-sm-10
             = f.text_area :message, class: 'form-control'
-        .field.form-group
-          = f.label :password, class: 'control-form col-sm-2'
-          .col-sm-10
-            = f.text_field :password, class: 'form-control'
+        - if not @author.id
+          .field.form-group
+            = label_tag 'password', 'Password', class: 'control-form col-sm-2'
+            .col-sm-10
+              = password_field_tag 'password[password]', '', class: 'form-control'
+          .field.form-group
+            = label_tag 'password_confimation', 'Password Confirmation', class: 'control-form col-sm-2'
+            .col-sm-10
+              = password_field_tag 'password[password_confimation]', '', class: 'form-control'
         .field.form-group
           = f.submit 'Save', class: 'btn btn-primary pull-right'
 
@@ -72,8 +77,19 @@
             .col-sm-10
               = text_field_tag('social_links[etsy]', @author.social_links[:etsy], {class: 'form-control'})
           .field.form-group
+            = submit_tag 'Save', class: 'btn btn-primary pull-right'
+
+    .row
+      %h3 Password
+      = form_tag(dashboard_author_password_path(@author.id), method: "patch") do |f|
+        .form-horizontal
+          .field.form-group
             = label_tag 'password', 'Password', class: 'control-form col-sm-2'
             .col-sm-10
-              = text_field_tag 'password', '', class: 'form-control'
+              = text_field_tag 'password[password]', '', class: 'form-control'
+          .field.form-group
+            = label_tag 'password_confimation', 'Password Confirmation', class: 'control-form col-sm-2'
+            .col-sm-10
+              = text_field_tag 'password[password_confimation]', '', class: 'form-control'
           .field.form-group
             = submit_tag 'Save', class: 'btn btn-primary pull-right'

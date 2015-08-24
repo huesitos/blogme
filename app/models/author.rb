@@ -2,7 +2,6 @@ class Author < ActiveRecord::Base
   serialize :social_links
   has_secure_password
 
-  validates_presence_of :password_digest, :on => :create
   validates :email, :nickname, presence: true, uniqueness: true
   validates :email, format: {
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
@@ -11,7 +10,7 @@ class Author < ActiveRecord::Base
     with: /\w{1}/,
     message: "must not contain white spaces"
   }
-  validates :password_digest, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, on: :create
 
   has_many :posts
 end

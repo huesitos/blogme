@@ -18,6 +18,8 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
   def create
     author_params[:nickname].downcase! if author_params[:nickname]
     @author = Author.new(author_params)
+    @author.password = password_params[:password]
+    @author.password_confirmation = password_params[:password_confirmation]
 
     respond_to do |format|
       if @author.save
@@ -31,6 +33,7 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
 
   def update
     @author = Author.find(params[:id])
+    # binding.pry
 
     respond_to do |format|
       if @author.update(author_params)
@@ -44,10 +47,24 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
 
   def update_social_links
     @author = Author.find(params[:author_id])
-    social_links = params[:social_links]
 
     respond_to do |format|
-      if @author.update(social_links: social_links)
+      if @author.update(social_links: social_links_params)
+        flash[:success] = "Author #{@author.nickname} was updated."
+        format.html { redirect_to dashboard_authors_path }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
+  def update_password
+    @author = Author.find(params[:author_id])
+    @author.password = password_params[:password]
+    @author.password_confirmation = password_params[:password_confirmation]
+
+    respond_to do |format|
+      if @author.save
         flash[:success] = "Author #{@author.nickname} was updated."
         format.html { redirect_to dashboard_authors_path }
       else
@@ -73,9 +90,23 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
         :name,
         :last_name,
         :nickname,
-        :password,
         :image,
         :message,
         :email)
+    end
+
+    def password_params
+      params.require(:password).permit(
+        :password,
+        :password_confirmation)
+    end
+
+    def social_links_params
+      params.require(:social_links).permit(
+        :google,
+        :youtube,
+        :instagram,
+        :pinterest,
+        :etsy)
     end
 end
