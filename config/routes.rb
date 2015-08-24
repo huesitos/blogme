@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :pages
     resources :categories, except: [:show, :new]
 
-    resources :authors, except: [:show] do
+    resources :authors do
       patch 'update_social_links',
         to: 'authors#update_social_links',
         as: :social_links

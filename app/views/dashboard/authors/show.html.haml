@@ -1,0 +1,25 @@
+%h2 Profile
+
+.profile
+  .row
+    .col-sm-4.col-xs-4
+      = image_tag(@author.image, class: 'img-circle')
+
+    .col-sm-8
+      %h3="#{@author.name} #{@author.last_name}"
+      %p=@author.email
+      %p.lead=@author.message
+      %p
+        %strong Role:
+        =@author.role
+      %p
+        %strong Number of posts:
+        = @author.posts.count
+
+      %h3 Social links
+      - @author.social_links.each_pair do |key, value|
+        %p
+          %strong= "#{key.capitalize}:"
+          = link_to value, value
+
+      = link_to 'Edit', edit_dashboard_author_path(@author.id), class: 'btn btn-primary'

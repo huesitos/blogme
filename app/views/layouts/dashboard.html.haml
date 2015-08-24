@@ -24,12 +24,13 @@
               %li= link_to "Authors", dashboard_authors_path
               %li= link_to "Categories", dashboard_categories_path
               %li= link_to "Pages", dashboard_pages_path
+            %li= link_to "Profile", dashboard_author_path(current_author.id)
             %li= link_to "Log out", dashboard_log_out_path, method: :delete
 
       / Secondary nav
       - if ['posts', 'authors', 'pages'].include? controller.controller_name
         .container.sub-menu
-          %ul.nav.nav-pills.nav-defaul
+          %ul.nav.nav-pills.nav-default
             - if controller.controller_name == 'posts'
               %li= link_to "New post", new_dashboard_post_path
             - if admin_author?
@@ -41,12 +42,11 @@
     / Content
     .container
       %section{class: controller.controller_name != 'session' ? 'main col-sm-12' : 'main'}
-        .row
-          %ul.flashes
-            - flash.each do |name, msg|
-              %div{class: "alert alert-dimissible alert-#{name}"}
-                %button{type: "button", class: "close", 'data-dismiss': "alert", 'aria-label': "Close"}
-                  %span{'aria-hidden': true} &times;
-                = content_tag :li, msg
-        .row
+        %ul.flashes
+          - flash.each do |name, msg|
+            %div{class: "alert alert-dimissible alert-#{name}"}
+              %button{type: "button", class: "close", 'data-dismiss': "alert", 'aria-label': "Close"}
+                %span{'aria-hidden': true} &times;
+              = content_tag :li, msg
+        .container
           = yield

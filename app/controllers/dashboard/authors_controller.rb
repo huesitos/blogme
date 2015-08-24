@@ -1,9 +1,13 @@
 class Dashboard::AuthorsController < Dashboard::DashboardController
   before_action :authenticate_author
-  before_action :authorize_author
+  before_action :authorize_author, only: [:index, :new, :create, :destroy]
 
   def index
     @authors = Author.all
+  end
+
+  def show
+    @author = Author.find(params[:id])
   end
 
   def new
@@ -24,7 +28,7 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
     respond_to do |format|
       if @author.save
         flash[:success] = "A new author was added."
-        format.html { redirect_to dashboard_authors_path }
+        format.html { redirect_to dashboard_author_path(@author.id) }
       else
         format.html { render :new }
       end
@@ -33,12 +37,11 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
 
   def update
     @author = Author.find(params[:id])
-    # binding.pry
 
     respond_to do |format|
       if @author.update(author_params)
         flash[:success] = "Author #{@author.nickname} was updated."
-        format.html { redirect_to dashboard_authors_path }
+        format.html { redirect_to dashboard_author_path(@author.id) }
       else
         format.html { render :edit }
       end
@@ -51,7 +54,7 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
     respond_to do |format|
       if @author.update(social_links: social_links_params)
         flash[:success] = "Author #{@author.nickname} was updated."
-        format.html { redirect_to dashboard_authors_path }
+        format.html { redirect_to dashboard_author_path(@author.id) }
       else
         format.html { render :edit }
       end
@@ -66,7 +69,7 @@ class Dashboard::AuthorsController < Dashboard::DashboardController
     respond_to do |format|
       if @author.save
         flash[:success] = "Author #{@author.nickname} was updated."
-        format.html { redirect_to dashboard_authors_path }
+        format.html { redirect_to dashboard_author_path(@author.id) }
       else
         format.html { render :edit }
       end
