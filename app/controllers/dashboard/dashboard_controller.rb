@@ -8,13 +8,13 @@ class Dashboard::DashboardController < ApplicationController
     end
 
     def authenticate_author
-      if current_author.nil?
+      if not current_author
         redirect_to(dashboard_log_in_path)
       end
     end
 
     def authorize_author
-      if current_author.role != "admin"
+      if not admin_author?
         redirect_to dashboard_posts_path
       end
     end

@@ -13,7 +13,7 @@
         - description.length > 10 ? extra = '...' : extra = ''
         %p= description.slice(0, 50).join(' ') + extra
 
-        - if current_author.role == "admin"
+        - if admin_author?
           = link_to "#{post.author.name} #{post.author.last_name}", dashboard_posts_path(nickname: post.author.nickname)
         %ul.tags
           = render post.tags

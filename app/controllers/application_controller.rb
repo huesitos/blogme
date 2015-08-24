@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_author
+  helper_method :admin_author?
 
   private
 
@@ -13,5 +14,9 @@ class ApplicationController < ActionController::Base
       else
         @current_author = nil
       end
+    end
+
+    def admin_author?
+      current_author ? current_author.role == "admin" : nil
     end
 end
