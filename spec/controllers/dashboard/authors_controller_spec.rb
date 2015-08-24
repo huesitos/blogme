@@ -71,7 +71,7 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
       post :create, author: author_hash, password: password_hash
 
       author = assigns(:author)
-      expect(response).to redirect_to("/dashboard/authors")
+      expect(response).to redirect_to(dashboard_author_path(author.id))
     end
 
     it "renders to the new template when unsuccessful" do
@@ -132,7 +132,7 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
       patch :update, id: author.id, author: author_hash
 
       author = assigns(:author)
-      expect(response).to redirect_to("/dashboard/authors")
+      expect(response).to redirect_to(dashboard_author_path(author.id))
     end
 
     it "renders to the edit template when unsuccessful" do
@@ -161,7 +161,7 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
       patch :update_social_links, author_id: author.id, social_links: social_links
 
       author = assigns(:author)
-      expect(response).to redirect_to("/dashboard/authors")
+      expect(response).to redirect_to(dashboard_author_path(author.id))
     end
   end
 
@@ -185,7 +185,7 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
       patch :update_password, author_id: author.id, password: new_password
 
       author = assigns(:author)
-      expect(response).to redirect_to("/dashboard/authors")
+      expect(response).to redirect_to(dashboard_author_path(author.id))
     end
   end
 
