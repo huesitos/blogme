@@ -64,15 +64,15 @@
           .col-sm-4.col-xs-4
             %h4 Categories
             %ul
-            - @categories.each do |c|
-              %li= link_to c.name, category_path(category: c.name)
+              - @categories.each do |c|
+                %li= link_to c.name, category_path(category: c.name)
           .col-sm-4.col-xs-4
             %h4 Pages
             %ul
-            - @pages.each do |pa|
-              %li= link_to pa.name, page_path(name: pa.name)
+              - @pages.each do |pa|
+                %li= link_to pa.name, page_path(name: pa.name)
           .col-sm-4.col-xs-4
-            %h4 Other links
+            %h4 More
         .row
           .col-sm-6
             %p Copyright © 2015 Blogme. All rights reserved.
