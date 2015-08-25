@@ -90,6 +90,9 @@ p, span, a, li {
 
   #content {
     min-height: 860px;
+    @media (min-width: $screen-sm-min) {
+      padding: 0;
+    }
   }
 
   footer {

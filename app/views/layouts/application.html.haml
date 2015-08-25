@@ -27,10 +27,10 @@
 
     #content.container
       .row
-        .main-content.col-sm-9
+        .main-content.col-md-9.col-sm-12
           = yield
 
-        %aside.sidebar.col-sm-3
+        %aside.sidebar.col-md-3.col-sm-12
           - if @author
             = render @author
 

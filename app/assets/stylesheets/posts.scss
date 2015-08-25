@@ -1,3 +1,6 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 @mixin simple-filter($class, $bcolor) {
   list-style: none;
   padding: 0;
@@ -52,4 +55,39 @@
 -------------------------------------------------------------------- */
 
 #application {
+
+  .post-main,
+  .post {
+    margin-bottom: 20px;
+    border: 1px solid #f0f0f0;
+
+    .row {
+      margin: 0;
+    }
+
+    .date,
+    .post-content,
+    .post-content .title {
+      padding: 0;
+    }
+
+    .preview-image{
+      overflow: hidden;
+    }
+
+    .date {
+      padding-top: 10px;
+
+      .day {
+        font-weight: bold;
+        font-size: 3em;
+      }
+
+      .month-year {
+        span {
+          display: block
+        }
+      }
+    }
+  }
 }

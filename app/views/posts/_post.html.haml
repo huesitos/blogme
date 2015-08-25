@@ -1,25 +1,28 @@
-.post
-  .preview_image
-    = image_tag(post.preview_image, style: "width: 100%; height: 300px;")
-  %header
-    .date
-      .day
+%div{class: @main ? 'post-main' : 'post'}
+  .preview-image
+    = image_tag(post.preview_image, class: 'img-responsive')
+  .row
+    %div.date{class: @main ? 'col-sm-2 col-xs-2' : 'col-sm-3 col-xs-2'}
+      .day.text-center
         %span=post.created_at.to_date.day
-      .month-year
+      .month-year.text-center
         %span=post.created_at.to_date.strftime('%B')
         %span=post.created_at.to_date.year
-    - title = post.title.split(' ')
-    - title.length > @words_title ? extra = '...' : extra = ''
-    - title = title.slice(0, @words_title).join(' ') + extra
 
-    %h4.title= link_to "#{title+extra}", post_path(post.id)
-  %section.content
-    =link_to "by #{post.author.nickname}", author_path(post.author.nickname)
-    - description = post.description.split('</p>').join(' ')
-    - description = strip_tags(description).split(' ')
-    - description.length > @words_content ? extra = '...' : extra = ''
-    %p= description.slice(0, @words_content).join(' ') + extra
+    %div.post-content{class: @main ? 'col-sm-10 col-xs-10' : 'col-sm-9 col-xs-10'}
+      - title = post.title.split(' ')
+      - title.length > @words_title ? extra = '...' : extra = ''
+      - title = title.slice(0, @words_title).join(' ') + extra
 
-  %ul.tags
-    = render post.tags
+      .title.h4= link_to "#{title+extra}", post_path(post.id)
+
+      .summary
+        =link_to "by #{post.author.nickname}", author_path(post.author.nickname)
+        - description = post.description.split('</p>').join(' ')
+        - description = strip_tags(description).split(' ')
+        - description.length > @words_content ? extra = '...' : extra = ''
+        %p= description.slice(0, @words_content).join(' ') + extra
+
+        %ul.list-inline.tags
+          = render post.tags
 

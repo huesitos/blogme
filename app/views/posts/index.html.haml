@@ -6,7 +6,8 @@
   - pa = @posts.to_a
   .row
     .col-sm-12
-      = render pa.shift
+      - @main = true
+      = render pa.shift, locals: {main: @main}
 
   - @words_content = 10
   - @words_title = 11
@@ -14,7 +15,8 @@
   .row
     - pa.each do |p|
       .col-sm-6
-        = render p
+        - @main = false
+        = render p, locals: {main: @main}
 
 
 
