@@ -1,31 +1,28 @@
 .post-full
   %header
-    .date
-      .day
-        %span=@post.created_at.to_date.day
-      .month-year
-        %span=@post.created_at.to_date.strftime('%B')
-        %span=@post.created_at.to_date.year
-    %h4.title= @post.title
+    %h3.title= @post.title
     .info
-      %p.pull-right
-        by
+      %p
+        %span{class: 'glyphicon glyphicon-user'}
         = link_to "#{@post.author.name} #{@post.author.last_name}", author_path(@post.author.id)
-  %section.content
+    .date.small
+      %span=@post.created_at.to_date.strftime('%d %B %Y')
+  %section.content.text-justify
     = simple_format(@post.description)
 
-  %ul.tags
+  %ul.list-inline.tags
     = render @post.tags
 
   %section.comments
-    %h4 Comments
+    %h4.text-center.page-header Comments
     = render @comments
 
     = form_for @comment, url: comments_path(@post.id) do |f|
-      %strong Leave a comment
+      %p
+        %strong Leave a comment
       .field
         = f.text_field :name, {class: 'form-control', placeholder: 'Name'}
       .field
         = f.text_area :content, class: 'form-control', placeholder: 'Comment'
       .field
-        = f.submit 'Comment', class: 'btn btn-primary'
+        = f.submit 'Comment', class: 'btn btn-primary pull-right'

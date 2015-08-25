@@ -90,4 +90,34 @@
       }
     }
   }
+
+  .post-full {
+    header {
+      .date,
+      .info {
+        display: inline-block;
+      }
+
+      .date {
+        color: #555;
+      }
+    }
+
+    .comments {
+      .comment {
+        padding-left: 20px;
+        border-left: 5px solid #ddd;
+      }
+
+      form {
+        textarea {
+          resize: vertical;
+        }
+
+        input[type=submit] {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
 }
