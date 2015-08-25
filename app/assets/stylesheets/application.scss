@@ -74,7 +74,7 @@ p, span, a, li {
   /* ---- Layout ---- */
 
   header.navbar {
-    padding-top: 20px;
+    min-height: 75px;
     line-height: 80px;
 
     ul {
@@ -83,13 +83,22 @@ p, span, a, li {
 
     .logo {
       img {
-        vertical-align: middle;
+        height: inherit;
+      }
+      a {
+        display: block;
+
+        @media (max-width: $screen-xs-max) {
+          width: 170px;
+          margin: 0 auto;
+        }
       }
     }
   }
 
   #content {
     min-height: 860px;
+    margin-top: 95px;
     @media (min-width: $screen-sm-min) {
       padding: 0;
     }

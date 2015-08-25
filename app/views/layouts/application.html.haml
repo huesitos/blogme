@@ -6,20 +6,20 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     %link{:href => "http://fonts.googleapis.com/css?family=Oswald", :rel => "stylesheet", :type => "text/css"}/
+
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
   %body{:id => "application", :class => controller.controller_name}
-    %header.navbar
+    %header.navbar.navbar-fixed-top
       .container
-        .row.text-uppercase
-          .col-sm-4.hidden-xs
-            %ul.list-inline.text-right
+        .row
+          .logo.col-sm-3.col-xs-12
+            %a{href: "/"}
+              = image_tag('logo.png')
+          .col-sm-9.col-xs-12
+            %ul{class: 'list-inline collapse navbar-collapse text-uppercase pull-right'}
               %li= link_to 'Home', home_path, class: 'active'
               - @categories.each do |c|
                 %li= link_to c.name, category_path(category: c.name)
-          .col-sm-3.col-xs-12
-            .logo
-              = image_tag('logo.png', class: 'img-responsive center-block')
-          .col-sm-4.hidden-xs
-            %ul.list-inline.text-left
               - @pages.each do |p|
                 %li= link_to p.name, page_path(name: p.name)
 
