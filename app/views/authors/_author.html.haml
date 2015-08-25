@@ -1,10 +1,11 @@
-.author-profile
+.author-profile.text-center
   %h4 Author
-  = image_tag(@author.image)
-  %strong
-    =link_to "#{@author.name} #{@author.last_name}", author_path(nickname: @author.nickname)
+  = image_tag(@author.image, class: 'img-responsive img-circle')
+  %p.name
+    %strong
+      =link_to "#{@author.name} #{@author.last_name}", author_path(nickname: @author.nickname)
   %p.message=@author.message
 
   %ul.social-links.list-inline
     - @author.social_links.each_pair do |key, value|
-      %li= link_to image_tag(key), value, class: "icon #{key}"
+      %li= link_to image_tag(key, class: 'img-responsive'), value, class: "icon #{key}"

@@ -1,2 +1,21 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 #dashboard.authors {
+}
+
+#application {
+  .author-profile {
+    .name {
+      margin-top: 5px;
+    }
+
+    .social-links .icon img {
+      width: 40px;
+
+      @media (max-width: $screen-xs-max) {
+        width: 50px;
+      }
+    }
+  }
 }
