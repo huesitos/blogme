@@ -1,20 +1,20 @@
-%h3
-  = "#{@author.nickname}'s" if @author
-  = "#{@category.name}" if @category
-  Posts
-
 - @words_content = 30
 - @words_title = 20
 
 - if not @posts.empty?
+  - main = true
   - pa = @posts.to_a
-  = render pa.shift
+  .row
+    .col-sm-12
+      = render pa.shift
 
   - @words_content = 10
   - @words_title = 11
-  - pa.each do |p|
-    .half-size
-      = render p
+  - main = false
+  .row
+    - pa.each do |p|
+      .col-sm-6
+        = render p
 
 
 

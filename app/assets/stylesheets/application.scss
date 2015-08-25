@@ -12,7 +12,8 @@ strong { font-weight: bold; }
 
 /* --------------------------------------------------------------------
    Imports
--------------------------------------------------------------------- */
+------------------------------------------------------------------
+-- */
 
 @import "variables";
 @import "posts";
@@ -23,9 +24,9 @@ strong { font-weight: bold; }
 @import "dashboard";
 @import "froala_editor.min.css";
 @import 'font-awesome';
+@import "bootstrap-customization";
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "bootstrap-customization";
 
 
 /* --------------------------------------------------------------------
@@ -33,9 +34,8 @@ strong { font-weight: bold; }
 -------------------------------------------------------------------- */
 
 /* ---- Base ---- */
-
 html {
-  font-size: 18px;
+  font-size: 16px;
 }
 body {
   font-size: 1em;
@@ -74,7 +74,18 @@ p, span, a, li {
   /* ---- Layout ---- */
 
   header.navbar {
-    padding: 30px 0;
+    padding-top: 20px;
+    line-height: 80px;
+
+    ul {
+      line-height: inherit;
+    }
+
+    .logo {
+      img {
+        vertical-align: middle;
+      }
+    }
   }
 
   #content {

@@ -7,16 +7,21 @@
     = csrf_meta_tags
     %link{:href => "http://fonts.googleapis.com/css?family=Oswald", :rel => "stylesheet", :type => "text/css"}/
   %body{:id => "application", :class => controller.controller_name}
-    %header.navbar.navbar-fixed-top
+    %header.navbar
       .container
-        %ul.list-inline
-          %li= link_to 'Home', home_path, class: 'active'
-          - if @categories
-            - @categories.each do |c|
-              %li= link_to c.name, category_path(category: c.name)
-          - if @categories
-            - @pages.each do |p|
-              %li= link_to p.name, page_path(name: p.name)
+        .row.text-uppercase
+          .col-sm-4.hidden-xs
+            %ul.list-inline.text-right
+              %li= link_to 'Home', home_path, class: 'active'
+              - @categories.each do |c|
+                %li= link_to c.name, category_path(category: c.name)
+          .col-sm-3.col-xs-12
+            .logo
+              = image_tag('logo.png', class: 'img-responsive center-block')
+          .col-sm-4.hidden-xs
+            %ul.list-inline.text-left
+              - @pages.each do |p|
+                %li= link_to p.name, page_path(name: p.name)
 
     / Content
 
@@ -25,12 +30,12 @@
         .main-content.col-sm-9
           = yield
 
-        %aside.sidebar
+        %aside.sidebar.col-sm-3
           - if @author
             = render @author
 
           %ol.popular-posts
-            %h4 Popular posts
+            %h4.text-center Popular posts
             -@popular_posts.each do |pp|
               %li=link_to pp.title, post_path(pp.id)
           .archive
@@ -52,23 +57,24 @@
     %footer
       .container
         .row
-          .col-sm-3
+          .col-sm-3.col-xs-4
             %h4 Categories
             %ul
             - @categories.each do |c|
               %li= link_to c.name, category_path(category: c.name)
-          .col-sm-3
+          .col-sm-3.col-xs-4
             %h4 Pages
             %ul
             - @pages.each do |pa|
               %li= link_to pa.name, page_path(name: pa.name)
-          .col-sm-3
+          .col-sm-3.col-xs-4
+            %h4 Other links
+          .clearfix.visible-xs
+          .col-sm-3.col-xs-12
             %h4 Recent posts
-            %ul
+            %ol
               - @recent_posts.each do |po|
                 %li= link_to po.title, post_path(po.id)
-          .col-sm-3
-            %h4 Other links
         .row
           .col-sm-6
             %p Copyright © 2015 Blogme. All rights reserved.
