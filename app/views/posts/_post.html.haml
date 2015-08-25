@@ -2,14 +2,14 @@
   .preview-image
     = image_tag(post.preview_image, class: 'img-responsive')
   .row
-    %div.date{class: @main ? 'col-sm-2 col-xs-2' : 'col-sm-3 col-xs-2'}
+    %div.date{class: @main ? 'col-sm-2 col-xs-3' : 'col-sm-3 col-xs-3'}
       .day.text-center
         %span=post.created_at.to_date.day
       .month-year.text-center
         %span=post.created_at.to_date.strftime('%B')
         %span=post.created_at.to_date.year
 
-    %div.post-content{class: @main ? 'col-sm-10 col-xs-10' : 'col-sm-9 col-xs-10'}
+    %div.post-content{class: @main ? 'col-sm-10 col-xs-9' : 'col-sm-9 col-xs-9'}
       - title = post.title.split(' ')
       - title.length > @words_title ? extra = '...' : extra = ''
       - title = title.slice(0, @words_title).join(' ') + extra
