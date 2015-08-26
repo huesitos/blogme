@@ -3,7 +3,7 @@
     = image_tag(post.preview_image, class: 'img-responsive center-block')
   .row
     %div.date{class: @main ? 'col-sm-2 col-xs-3' : 'col-sm-3 col-xs-3'}
-      .day.text-center
+      .day.text-center.normal-highlight
         %span=post.created_at.to_date.day
       .month-year.text-center.text-uppercase.small
         %span=post.created_at.to_date.strftime('%B')
@@ -14,7 +14,7 @@
       - title.length > @words_title ? extra = '...' : extra = ''
       - title = title.slice(0, @words_title).join(' ') + extra
 
-      .title.h4= link_to "#{title+extra}", post_path(post.id)
+      %h4.handwrite-typography.title= link_to "#{title+extra}", post_path(post.id)
 
       .summary
         =link_to "by #{post.author.nickname}", author_path(post.author.nickname)

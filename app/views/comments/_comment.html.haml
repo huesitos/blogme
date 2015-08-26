@@ -2,7 +2,7 @@
   %header
     %p
       %strong=comment.name
-      %span.time.small.text-muted
+      %span.time
         =comment.created_at.to_date.strftime("%d %b %y")
         @
         =comment.created_at.to_time.strftime("%I:%M %p")

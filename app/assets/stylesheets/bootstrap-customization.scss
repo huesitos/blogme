@@ -1,5 +1,24 @@
+$brand-primary: #870029;
+$brand-secondary: #c12149;
+$brand-third: #ec8080;
+
+$page-header-border-color: complement($brand-secondary);
+
+/* ---- Navbar ---- */
+// Dashboard
 $navbar-default-link-hover-color: #fff;
 $navbar-default-link-hover-bg: #999;
+
+// Application
+$nav-link-hover-bg: lighten($brand-third, 20%);
+
+/* ---- Buttons ---- */
+$btn-border-radius-base: 0;
+
+$btn-default-color: $brand-primary;
+$btn-default-bg: lighten($brand-third, 20%);
+
+$btn-primary-bg: $brand-secondary;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";

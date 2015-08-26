@@ -1,4 +1,4 @@
 .post-simple
   .preview-image
     = image_tag(@cpost.preview_image, class: 'img-responsive center-block')
-  .title.h4= link_to "#{@cpost.title}", post_path(@cpost.id)
+  %h5.handwrite-typography.title= link_to "#{@cpost.title}", post_path(@cpost.id)

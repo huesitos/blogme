@@ -36,10 +36,17 @@ html {
 }
 body {
   font-size: 1em;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* ---- Typogragphy ---- */
+
+@import url(http://fonts.googleapis.com/css?family=Patrick+Hand);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,300italic,700,700italic,400italic,400);
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: light;
+}
 
 h1 {
   font-size: 4.375em; /* 70px/16px */
@@ -52,10 +59,15 @@ h3 {
   font-size: 2.5em; /* 40px/16px */
 }
 h4 {
-  font-size: 1.25em; /* 20px/16px */
+  font-size: 1.9em; /* 20px/16px */
 }
 h5 {
-  font-size: 1em;
+  font-size: 1.25em;
+}
+
+.handwrite-typography {
+  font-family: 'Patrick Hand', cursive;
+  font-weight: bold;
 }
 
 p, span, a, li {
@@ -135,7 +147,7 @@ p, span, a, li {
 
   #content {
     min-height: 860px;
-    margin-top: 95px;
+    margin-top: 90px;
 
     @media (min-width: $screen-md-min) {
       padding: 0;
@@ -231,4 +243,16 @@ p, span, a, li {
 
 .inline {
   display: inline-block;
+}
+
+.light-highlight {
+  color: $brand-third;
+}
+
+.normal-highlight {
+  color: $brand-secondary;
+}
+
+.heavy-highlight {
+  color: $brand-secondary;
 }

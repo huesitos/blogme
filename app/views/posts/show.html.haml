@@ -2,14 +2,16 @@
   %header
     .preview-image
       = image_tag(@post.preview_image, class: 'img-responsive center-block')
-    %h3.text-center.title= @post.title
-    .info.text-center.small.text-muted
+
+    %h3.text-center.handwrite-typography.title= @post.title
+
+    .info.text-center.small
       %p.inline
         %span.glyphicon.glyphicon-user
         = link_to "#{@post.author.name} #{@post.author.last_name}", author_path(@post.author.id)
       %p.inline.date
         %span.glyphicon.glyphicon-time
-        %span=@post.created_at.to_date.strftime('%d %B %Y')
+        %span.normal-highlight=@post.created_at.to_date.strftime('%d %B %Y')
       %p.inline
         %span.glyphicon.glyphicon-folder-close
         = link_to "#{@post.category.name}", category_path(category: @post.category.name)
@@ -23,16 +25,16 @@
   - if @category_posts
     %section.category-posts
       .row
-        %h4.text-center.page-header.text-uppercase
+        %h5.text-center.page-header.text-uppercase
           More from
-          %strong= @post.category.name
+          %strong.normal-highlight= @post.category.name
         - @category_posts.each do |post|
           - @cpost = post
           .col-sm-4
             = render 'posts/post_simple', locals: {cpost: @cpost}
 
   %section.comments
-    %h4.text-center.text-uppercase.page-header Comments
+    %h5.text-center.text-uppercase.page-header Comments
     = render @comments
 
     = form_for @comment, url: comments_path(@post.id) do |f|
