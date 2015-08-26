@@ -120,5 +120,13 @@ p, span, a, li {
 
   footer {
     background-color: #F0F0F0;
+
+    .social-links a {
+      display: inline-block;
+    }
+
+    .social-links .icon img {
+      width: 30px;
+    }
   }
 }

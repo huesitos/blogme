@@ -61,20 +61,20 @@
     %footer
       .container
         .row
-          .col-sm-4.col-xs-4
+          .col-sm-4.col-xs-4.text-center
             %h4 Categories
             %ul
               - @categories.each do |c|
                 %li= link_to c.name, category_path(category: c.name)
-          .col-sm-4.col-xs-4
+          .col-sm-4.col-xs-4.text-center
             %h4 Pages
             %ul
               - @pages.each do |pa|
                 %li= link_to pa.name, page_path(name: pa.name)
-          .col-sm-4.col-xs-4
+          .col-sm-4.col-xs-4.text-center
             %h4 More
+            %ul
+              %li= link_to "Etsy store", "https://www.etsy.com/shop/PurrrfectDesign?ref=search_shop_redirect"
         .row
-          .col-sm-6
+          .col-sm-12.text-center
             %p Copyright © 2015 Blogme. All rights reserved.
-          .col-sm-6
-            %p Social links
