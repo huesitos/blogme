@@ -1,1 +1,3 @@
-%li.tag=link_to tag.name, posts_path(tag: tag.name)
+%li.tag
+  %span.glyphicon.glyphicon-tag.small
+  =link_to tag.name, posts_path(tag: tag.name)

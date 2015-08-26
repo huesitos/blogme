@@ -56,6 +56,12 @@
 
 #application {
 
+  .tags {
+    .tag {
+      border: 1px solid #ddd;
+    }
+  }
+
   .post-main,
   .post {
     margin-bottom: 20px;
@@ -93,14 +99,21 @@
 
   .post-full {
     header {
-      .date,
       .info {
-        display: inline-block;
-      }
-
-      .date {
         color: #555;
+
+        a {
+          color: #555;
+        }
+
+        p {
+          margin: 0 5px;
+        }
       }
+    }
+
+    .content {
+      margin: 20px 0;
     }
 
     .comments {

@@ -1,16 +1,23 @@
 .post-full
   %header
-    %h3.title= @post.title
-    .info
-      %p
-        %span{class: 'glyphicon glyphicon-user'}
+    .preview-image
+      = image_tag(@post.preview_image, class: 'img-responsive')
+    %h3.text-center.title= @post.title
+    .info.text-center.small
+      %p.inline
+        %span.glyphicon.glyphicon-user
         = link_to "#{@post.author.name} #{@post.author.last_name}", author_path(@post.author.id)
-    .date.small
-      %span=@post.created_at.to_date.strftime('%d %B %Y')
+      %p.inline.date
+        %span.glyphicon.glyphicon-time
+        %span=@post.created_at.to_date.strftime('%d %B %Y')
+      %p.inline
+        %span.glyphicon.glyphicon-folder-close
+        = link_to "#{@post.category.name}", category_path(category: @post.category.name)
+
   %section.content.text-justify
     = simple_format(@post.description)
 
-  %ul.list-inline.tags
+  %ul.list-inline.tags.text-center
     = render @post.tags
 
   %section.comments
