@@ -15,7 +15,7 @@ strong { font-weight: bold; }
 ------------------------------------------------------------------
 -- */
 
-@import "variables";
+@import "bootstrap-customization";
 @import "posts";
 @import "session";
 @import "categories";
@@ -24,9 +24,6 @@ strong { font-weight: bold; }
 @import "dashboard";
 @import "froala_editor.min.css";
 @import 'font-awesome';
-@import "bootstrap-customization";
-@import "bootstrap-sprockets";
-@import "bootstrap";
 
 
 /* --------------------------------------------------------------------
@@ -71,7 +68,11 @@ p, span, a, li {
 -------------------------------------------------------------------- */
 
 #application {
-  /* ---- Layout ---- */
+  /* --------------------------------------------------------------------
+     Layout
+  -------------------------------------------------------------------- */
+
+  /* ---- Navbar ---- */
 
   header.navbar {
     ul {
@@ -130,6 +131,8 @@ p, span, a, li {
     }
   }
 
+  /* ---- Content ---- */
+
   #content {
     min-height: 860px;
     margin-top: 95px;
@@ -141,6 +144,8 @@ p, span, a, li {
       margin-top: 80px;
     }
   }
+
+  /* ---- Sidebar ---- */
 
   .sidebar {
     section {
@@ -188,6 +193,8 @@ p, span, a, li {
     }
   }
 
+  /* ---- Footer ---- */
+
   footer {
     margin-top: 40px;
     padding: 15px 0;
@@ -197,7 +204,9 @@ p, span, a, li {
     }
   }
 
-  /* ---- Colors ---- */
+  /* --------------------------------------------------------------------
+     Colors
+  -------------------------------------------------------------------- */
 
   header.navbar {
     background-color: white;
@@ -215,6 +224,10 @@ p, span, a, li {
     }
   }
 }
+
+/* --------------------------------------------------------------------
+   Helper classes
+-------------------------------------------------------------------- */
 
 .inline {
   display: inline-block;

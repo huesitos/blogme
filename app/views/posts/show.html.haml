@@ -3,7 +3,7 @@
     .preview-image
       = image_tag(@post.preview_image, class: 'img-responsive center-block')
     %h3.text-center.title= @post.title
-    .info.text-center.small
+    .info.text-center.small.text-muted
       %p.inline
         %span.glyphicon.glyphicon-user
         = link_to "#{@post.author.name} #{@post.author.last_name}", author_path(@post.author.id)

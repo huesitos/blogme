@@ -1,9 +1,5 @@
-#application {
-}
+$navbar-default-link-hover-color: #fff;
+$navbar-default-link-hover-bg: #999;
 
-#dashboard {
-  .navbar li a:hover {
-    background-color: #999;
-    color: #fff;
-  }
-}
+@import "bootstrap-sprockets";
+@import "bootstrap";
