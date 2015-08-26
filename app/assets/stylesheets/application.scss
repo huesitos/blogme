@@ -99,7 +99,7 @@ p, span, a, li {
   #content {
     min-height: 860px;
     margin-top: 95px;
-    @media (min-width: $screen-sm-min) {
+    @media (min-width: $screen-md-min) {
       padding: 0;
     }
   }
