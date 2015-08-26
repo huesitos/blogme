@@ -36,7 +36,7 @@
 
           %ol.popular-posts
             %h4.text-center Popular posts
-            -@popular_posts.each do |pp|
+            - @popular_posts.each do |pp|
               %li=link_to pp.title, post_path(pp.id)
           %ol.recent-posts
             %h4.text-center Recent posts
