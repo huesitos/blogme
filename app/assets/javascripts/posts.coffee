@@ -9,8 +9,4 @@ $(document).on 'page:ready page:change', ->
 
   $('.expand-btn').click ->
     $plist = $(this).parent().find('.monthly-posts')
-    console.log($plist)
-    for post in $plist.children('li')
-      do ->
-        $(post).toggleClass('show')
-        $(post).toggleClass('hidden')
+    $plist.toggleClass('hidden')

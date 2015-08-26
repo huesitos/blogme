@@ -70,9 +70,9 @@
                       = "#{month}"
                       %small="(#{posts.length})"
                       %span.caret
-                    %ul.monthly-posts
+                    %ul.monthly-posts.hidden
                       - posts.each do |post|
-                        %li.small.hidden
+                        %li.small
                           %span.small.glyphicon.glyphicon-chevron-right
                           = link_to post[0], post_path(id:post[1])
           / TODO
