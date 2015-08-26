@@ -24,3 +24,9 @@
 //= require bootstrap-sprockets
 //= require langs/ro.js
 //= require_tree .
+
+$(document).on('page:ready page:change', function() {
+  $('.sidebar-more').click(function() {
+    $('.sidebar-content').toggleClass('hidden-xs');
+  });
+});

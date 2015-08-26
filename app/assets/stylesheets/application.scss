@@ -74,23 +74,57 @@ p, span, a, li {
   /* ---- Layout ---- */
 
   header.navbar {
-    min-height: 75px;
-    line-height: 80px;
-
     ul {
       line-height: inherit;
     }
 
     .logo {
-      img {
-        height: inherit;
+      max-height: inherit;
+
+      .navbar-more {
+        position: relative;
+        margin-top: 10px;
+        border: none;
+        right: -15px;
       }
+
       a {
         display: block;
+        padding: 8px 0;
+      }
 
-        @media (max-width: $screen-xs-max) {
-          width: 170px;
+      img {
+        vertical-align: bottom;
+        width: 140px;
+        height: 40px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        a,
+        img {
+          width: 130px;
+        }
+        a {
           margin: 0 auto;
+        }
+      }
+    }
+
+    .menu {
+      li a {
+        height: 56px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        text-align: center;
+
+        li {
+          display: inline-block;
+        }
+
+        li a {
+          height: 40px;
+          font-size: 0.9em;
         }
       }
     }
@@ -99,8 +133,12 @@ p, span, a, li {
   #content {
     min-height: 860px;
     margin-top: 95px;
+
     @media (min-width: $screen-md-min) {
       padding: 0;
+    }
+    @media (max-width: $screen-xs-max) {
+      margin-top: 80px;
     }
   }
 

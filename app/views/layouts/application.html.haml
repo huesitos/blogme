@@ -9,19 +9,22 @@
 
     %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
   %body{:id => "application", :class => controller.controller_name}
+    .extra-space
     %header.navbar.navbar-fixed-top
       .container
-        .row
-          .logo.col-sm-3.col-xs-12
-            %a{href: "/"}
-              = image_tag('logo.png')
-          .col-sm-9.col-xs-12
-            %ul{class: 'list-inline collapse navbar-collapse text-uppercase pull-right'}
-              %li= link_to 'Home', home_path, class: 'active'
-              - @categories.each do |c|
-                %li= link_to c.name, category_path(category: c.name)
-              - @pages.each do |p|
-                %li= link_to p.name, page_path(name: p.name)
+        .logo.navbar-left
+          %button{class: 'btn btn-default collapsed navbar-toggle navbar-more pull-right', 'data-toggle': 'collapse', 'data-target': '.navbar-collapse'}
+            %span.glyphicon.glyphicon-menu-hamburger
+
+          %a{href: "/"}
+            = image_tag('logo.png')
+
+        %ul{class: 'menu nav navbar-nav navbar-collapse navbar-right collapse'}
+          %li= link_to 'Home', home_path
+          - @categories.each do |c|
+            %li= link_to c.name, category_path(category: c.name)
+          - @pages.each do |p|
+            %li= link_to p.name, page_path(name: p.name)
 
     / Content
 
@@ -35,38 +38,43 @@
             %section
               = render @author
 
-          %section
-            %ol.popular-posts.small
-              %h4.text-center.text-uppercase Popular posts
-              - @popular_posts.each do |pp|
-                %li.small
-                  %p.inline= link_to pp.title, post_path(pp.id)
-                  - def_class = "img-responsive img-rounded"
-                  = image_tag(pp.preview_image, class: pp.preview_image ? def_class + " inline" : def_class + " hidden")
+          %section.visible-xs
+            %button.btn.btn-primary.btn-block.sidebar-more
+              %span.glyphicon.glyphicon-menu-hamburger
 
-          %section
-            %ol.recent-posts.small
-              %h4.text-center.text-uppercase Recent posts
-              - @recent_posts.each do |po|
-                %li.small
-                  %p.inline= link_to po.title, post_path(po.id)
-                  - def_class = "img-responsive img-rounded"
-                  = image_tag(po.preview_image, class: po.preview_image ? def_class + " inline" : def_class + " hidden")
+          .sidebar-content.hidden-xs
+            %section
+              %ol.popular-posts.small
+                %h4.text-center.text-uppercase Popular posts
+                - @popular_posts.each do |pp|
+                  %li.small
+                    %p.inline= link_to pp.title, post_path(pp.id)
+                    - def_class = "img-responsive img-rounded"
+                    = image_tag(pp.preview_image, class: pp.preview_image ? def_class + " inline" : def_class + " hidden")
 
-          %section
-            .archive.small
-              %h4.text-center.text-uppercase Archive
-              - @archive.each_pair do |month, posts|
-                %div{class: "#{month.split(' ').join('-')}"}
-                  %h5.expand-btn.text-uppercase
-                    = "#{month}"
-                    %small="(#{posts.length})"
-                    %span.caret
-                  %ul.monthly-posts
-                    - posts.each do |post|
-                      %li.small.hidden
-                        %span.small.glyphicon.glyphicon-chevron-right
-                        = link_to post[0], post_path(id:post[1])
+            %section
+              %ol.recent-posts.small
+                %h4.text-center.text-uppercase Recent posts
+                - @recent_posts.each do |po|
+                  %li.small
+                    %p.inline= link_to po.title, post_path(po.id)
+                    - def_class = "img-responsive img-rounded"
+                    = image_tag(po.preview_image, class: po.preview_image ? def_class + " inline" : def_class + " hidden")
+
+            %section
+              .archive.small
+                %h4.text-center.text-uppercase Archive
+                - @archive.each_pair do |month, posts|
+                  %div{class: "#{month.split(' ').join('-')}"}
+                    %h5.expand-btn.text-uppercase
+                      = "#{month}"
+                      %small="(#{posts.length})"
+                      %span.caret
+                    %ul.monthly-posts
+                      - posts.each do |post|
+                        %li.small.hidden
+                          %span.small.glyphicon.glyphicon-chevron-right
+                          = link_to post[0], post_path(id:post[1])
           / TODO
           / .suscribe-form
 
