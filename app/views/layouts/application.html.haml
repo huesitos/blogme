@@ -32,27 +32,33 @@
 
         %aside.sidebar.col-md-3.col-sm-12
           - if @author
-            = render @author
+            %section
+              = render @author
 
-          %ol.popular-posts
-            %h4.text-center Popular posts
-            - @popular_posts.each do |pp|
-              %li=link_to pp.title, post_path(pp.id)
-          %ol.recent-posts
-            %h4.text-center Recent posts
-            - @recent_posts.each do |po|
-              %li= link_to po.title, post_path(po.id)
-          .archive
-            %h4.text-center Archive
-            - @archive.each_pair do |month, posts|
-              %div{class: "#{month.split(' ').join('-')}"}
-                %h5.expand-btn.highlightable
-                  = "#{month}"
-                  %small="(#{posts.length})"
-                  %span.caret
-                %ul.monthly-posts
-                  - posts.each do |post|
-                    %li.hidden= link_to post[0], post_path(id:post[1])
+          %section
+            %ol.popular-posts
+              %h4.text-center Popular posts
+              - @popular_posts.each do |pp|
+                %li=link_to pp.title, post_path(pp.id)
+
+          %section
+            %ol.recent-posts
+              %h4.text-center Recent posts
+              - @recent_posts.each do |po|
+                %li= link_to po.title, post_path(po.id)
+
+          %section
+            .archive
+              %h4.text-center Archive
+              - @archive.each_pair do |month, posts|
+                %div{class: "#{month.split(' ').join('-')}"}
+                  %h5.expand-btn.highlightable
+                    = "#{month}"
+                    %small="(#{posts.length})"
+                    %span.caret
+                  %ul.monthly-posts
+                    - posts.each do |post|
+                      %li.hidden= link_to post[0], post_path(id:post[1])
           / TODO
           / .suscribe-form
 
