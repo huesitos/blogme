@@ -8,4 +8,5 @@
 
   %ul.social-links.list-inline
     - @author.social_links.each_pair do |key, value|
-      %li= link_to image_tag(key, class: 'img-responsive'), value, class: "icon #{key}"
+      - if value.length > 0
+        %li= link_to image_tag(key, class: 'img-responsive'), value, class: "icon #{key}"
