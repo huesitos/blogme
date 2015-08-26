@@ -120,6 +120,14 @@
       .comment {
         padding-left: 20px;
         border-left: 5px solid #ddd;
+
+        .time {
+          color: #555;
+        }
+
+        .text {
+          padding-left: 15px;
+        }
       }
 
       form {
