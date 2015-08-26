@@ -32,7 +32,7 @@
             = render 'posts/post_simple', locals: {cpost: @cpost}
 
   %section.comments
-    %h4.text-center.page-header Comments
+    %h4.text-center.text-uppercase.page-header Comments
     = render @comments
 
     = form_for @comment, url: comments_path(@post.id) do |f|
@@ -44,3 +44,4 @@
         = f.text_area :content, class: 'form-control', placeholder: 'Comment'
       .field
         = f.submit 'Comment', class: 'btn btn-primary pull-right'
+    .clearfix

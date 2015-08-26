@@ -36,29 +36,37 @@
               = render @author
 
           %section
-            %ol.popular-posts
-              %h4.text-center Popular posts
+            %ol.popular-posts.small
+              %h4.text-center.text-uppercase Popular posts
               - @popular_posts.each do |pp|
-                %li=link_to pp.title, post_path(pp.id)
+                %li.small
+                  %p.inline= link_to pp.title, post_path(pp.id)
+                  - def_class = "img-responsive img-rounded"
+                  = image_tag(pp.preview_image, class: pp.preview_image ? def_class + " inline" : def_class + " hidden")
 
           %section
-            %ol.recent-posts
-              %h4.text-center Recent posts
+            %ol.recent-posts.small
+              %h4.text-center.text-uppercase Recent posts
               - @recent_posts.each do |po|
-                %li= link_to po.title, post_path(po.id)
+                %li.small
+                  %p.inline= link_to po.title, post_path(po.id)
+                  - def_class = "img-responsive img-rounded"
+                  = image_tag(po.preview_image, class: po.preview_image ? def_class + " inline" : def_class + " hidden")
 
           %section
-            .archive
-              %h4.text-center Archive
+            .archive.small
+              %h4.text-center.text-uppercase Archive
               - @archive.each_pair do |month, posts|
                 %div{class: "#{month.split(' ').join('-')}"}
-                  %h5.expand-btn.highlightable
+                  %h5.expand-btn.text-uppercase
                     = "#{month}"
                     %small="(#{posts.length})"
                     %span.caret
                   %ul.monthly-posts
                     - posts.each do |post|
-                      %li.hidden= link_to post[0], post_path(id:post[1])
+                      %li.small.hidden
+                        %span.small.glyphicon.glyphicon-chevron-right
+                        = link_to post[0], post_path(id:post[1])
           / TODO
           / .suscribe-form
 

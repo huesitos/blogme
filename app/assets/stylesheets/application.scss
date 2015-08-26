@@ -108,6 +108,33 @@ p, span, a, li {
     section {
       margin-bottom: 30px;
     }
+
+    .popular-posts, .recent-posts {
+      padding: 0 10%;
+
+      @media (max-width: $screen-md-max) {
+        padding: 0 5%;
+      }
+
+      li {
+        margin-bottom: 5px;
+        width: 100%;
+
+        img {
+          width: 38%;
+          vertical-align: top;
+        }
+        p {
+          width: 60%;
+        }
+      }
+    }
+
+    .archive {
+      li {
+        margin-bottom: 3%;
+      }
+    }
   }
 
   footer {
