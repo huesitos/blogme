@@ -1,6 +1,6 @@
 .author-profile.text-center
   %h4 Author
-  = image_tag(@author.image, class: 'img-responsive img-circle')
+  = image_tag(@author.image, class: 'img-responsive img-circle center-block')
   %p.name
     %strong
       =link_to "#{@author.name} #{@author.last_name}", author_path(nickname: @author.nickname)
