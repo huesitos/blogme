@@ -173,6 +173,19 @@ p, span, a, li {
         margin-bottom: 3%;
       }
     }
+
+    @media all and (min-width: $screen-xs-max) and (max-width: 1071px) {
+      .author-profile {
+        img {
+          width: 70%;
+        }
+      }
+
+      .sidebar-content section{
+        display: inline-block;
+        width: 49%;
+      }
+    }
   }
 
   footer {
