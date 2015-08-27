@@ -4,8 +4,9 @@
 
 %ul.list-inline.categories
   - @categories.each do |c|
-    %li
-      .category
-        %strong=c.name
-        %span= link_to "Edit", edit_dashboard_category_path(c.id), class: 'btn btn-primary'
-        %span= link_to "Destroy", dashboard_category_path(c.id), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'
+    %li.category
+      %strong=c.name
+      = link_to edit_dashboard_category_path(c.id), class: 'normal-highlight' do
+        %span.glyphicon.glyphicon-pencil
+      = link_to dashboard_category_path(c.id), method: :delete, data: {confirm: 'Are you sure?'}, class: 'light-highlight' do
+        %span.glyphicon.glyphicon-trash
