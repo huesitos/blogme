@@ -13,6 +13,11 @@
   }
 }
 
+.wrap-content {
+  word-break: break-all;
+  padding-right: 5px;
+}
+
 /* --------------------------------------------------------------------
    Dashboard layout
 -------------------------------------------------------------------- */
@@ -27,12 +32,17 @@
       margin-top: 5px;
     }
 
+    .summary {
+      @extend .wrap-content;
+    }
+
     .options {
       a {
         margin-right: 5px;
       }
     }
   }
+
 
   .tags {
     @include simple-filter(tag, #eee)
@@ -98,6 +108,10 @@
           display: block
         }
       }
+    }
+
+    .summary {
+      @extend .wrap-content;
     }
   }
 
