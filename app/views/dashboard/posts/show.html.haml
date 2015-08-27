@@ -1,4 +1,6 @@
 .post-full
+  - if not @post.preview_image.empty?
+    = image_tag(@post.preview_image, class: 'img-responsive')
   %h2= @post.title
   %p= @post.created_at.to_time.strftime("%y %^b %d %H:%M:%S")
   = render inline: @post.description

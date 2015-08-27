@@ -1,5 +1,5 @@
 %div{class: @main ? 'post-main' : 'post'}
-  - if post.preview_image.length > 0
+  - if not post.preview_image.empty?
     .preview-image
       = image_tag(post.preview_image, class: 'img-responsive center-block')
   .row

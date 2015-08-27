@@ -49,7 +49,7 @@
                   %li.small
                     %p.inline= link_to pp.title, post_path(pp.id)
                     - def_class = "img-responsive img-rounded"
-                    -if pp.preview_image.length > 0
+                    - if not pp.preview_image.empty?
                       = image_tag(pp.preview_image, class: pp.preview_image ? def_class + " inline" : def_class + " hidden")
 
             %section
@@ -59,7 +59,7 @@
                   %li.small
                     %p.inline= link_to po.title, post_path(po.id)
                     - def_class = "img-responsive img-rounded"
-                    - if po.preview_image.length > 0
+                    - if not po.preview_image.empty?
                       = image_tag(po.preview_image, class: po.preview_image ? def_class + " inline" : def_class + " hidden")
 
             %section

@@ -1,7 +1,8 @@
 .col-sm-6.col-md-4
   .post
     .thumbnail
-      = image_tag(post.preview_image)
+      - if not post.preview_image.empty?
+        = image_tag(post.preview_image)
       .caption
         %h4=link_to post.title.split(' ').slice(0, 10).join(' ')+'...', dashboard_post_path(post.id)
         %p=post.created_at.to_date.strftime("%d %^b %y")

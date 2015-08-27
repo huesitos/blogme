@@ -1,5 +1,5 @@
 .post-simple
-  - if post.preview_image.length > 0
+  - if not @cpost.preview_image.empty?
     .preview-image
       = image_tag(@cpost.preview_image, class: 'img-responsive center-block')
   %h5.handwrite-typography.title= link_to "#{@cpost.title}", post_path(@cpost.id)

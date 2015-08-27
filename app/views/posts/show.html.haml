@@ -1,7 +1,8 @@
 .post-full
   %header
-    .preview-image
-      = image_tag(@post.preview_image, class: 'img-responsive center-block')
+    - if not @post.preview_image.empty?
+      .preview-image
+        = image_tag(@post.preview_image, class: 'img-responsive center-block')
 
     %h3.text-center.handwrite-typography.title= @post.title
 
