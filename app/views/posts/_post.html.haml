@@ -1,6 +1,7 @@
 %div{class: @main ? 'post-main' : 'post'}
-  .preview-image
-    = image_tag(post.preview_image, class: 'img-responsive center-block')
+  - if post.preview_image.length > 0
+    .preview-image
+      = image_tag(post.preview_image, class: 'img-responsive center-block')
   .row
     %div.date{class: @main ? 'col-sm-2 col-xs-3' : 'col-sm-3 col-xs-3'}
       .day.text-center.normal-highlight

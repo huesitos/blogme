@@ -49,7 +49,8 @@
                   %li.small
                     %p.inline= link_to pp.title, post_path(pp.id)
                     - def_class = "img-responsive img-rounded"
-                    = image_tag(pp.preview_image, class: pp.preview_image ? def_class + " inline" : def_class + " hidden")
+                    -if pp.preview_image.length > 0
+                      = image_tag(pp.preview_image, class: pp.preview_image ? def_class + " inline" : def_class + " hidden")
 
             %section
               %ol.recent-posts.small
@@ -58,7 +59,8 @@
                   %li.small
                     %p.inline= link_to po.title, post_path(po.id)
                     - def_class = "img-responsive img-rounded"
-                    = image_tag(po.preview_image, class: po.preview_image ? def_class + " inline" : def_class + " hidden")
+                    - if po.preview_image.length > 0
+                      = image_tag(po.preview_image, class: po.preview_image ? def_class + " inline" : def_class + " hidden")
 
             %section
               .archive.small
