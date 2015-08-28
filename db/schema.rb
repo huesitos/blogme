@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828181451) do
+ActiveRecord::Schema.define(version: 20150828193033) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150828181451) do
     t.string   "nickname"
     t.string   "email"
     t.string   "password_digest"
-    t.string   "image"
+    t.text     "image",           default: "no-profile-image.jpg"
     t.string   "message"
     t.string   "role",            default: "editor"
     t.datetime "created_at",                                                                                              null: false

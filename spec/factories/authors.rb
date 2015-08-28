@@ -18,8 +18,9 @@ FactoryGirl.define do
     nickname Faker::Internet.user_name
     email Faker::Internet.email
     password Faker::Internet.password
-    image Faker::Avatar.image
+    image 'no-profile-image.png'
     message Faker::Lorem.sentence
+    bio Faker::Lorem.sentence(50)
     role "editor"
   end
 end

@@ -8,7 +8,6 @@ RSpec.describe Dashboard::AuthorsController, type: :controller do
       name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       nickname: Faker::Internet.user_name,
-      image: Faker::Avatar.image,
       email: Faker::Internet.email,
       message: Faker::Lorem.sentence
     }
