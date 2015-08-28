@@ -71,7 +71,7 @@
                       = "#{month}"
                       %small="(#{posts.length})"
                       %span.caret
-                    %ul.monthly-posts.hidden
+                    %ul.monthly-posts.expandable
                       - posts.each do |post|
                         %li.small
                           %span.small.glyphicon.glyphicon-chevron-right

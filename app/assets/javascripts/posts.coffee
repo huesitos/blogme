@@ -8,5 +8,8 @@ $(document).on 'page:ready page:change', ->
   })
 
   $('.expand-btn').click ->
-    $plist = $(this).parent().find('.monthly-posts')
-    $plist.toggleClass('hidden')
+    $plist = $(this).parent().find('.expandable')
+    if $plist.css('display') == 'none'
+      $plist.slideDown()
+    else
+      $plist.slideUp()
