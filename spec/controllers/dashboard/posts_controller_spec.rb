@@ -23,8 +23,19 @@ RSpec.describe Dashboard::PostsController, type: :controller do
     end
 
     describe "POST create" do
-      let(:new_post) {{title: 'Un titulo', description: 'Una description'}}
-      before(:each) { post :create, :post => new_post, :tags => "sports, science" }
+      let(:new_post) {
+        {
+          title: 'Un titulo',
+          description: 'Una description',
+          preview_image: ''
+        }
+      }
+
+      before(:each) {
+        post :create,
+        :post => new_post,
+        :tags => "sports, science"
+      }
 
       it "creates a new post" do
         created_post = Post.last
@@ -78,7 +89,11 @@ RSpec.describe Dashboard::PostsController, type: :controller do
         end
 
         it "rendering the new template when unsuccessful" do
-          post :create, :post => {title: '', description: ''}
+          post :create, :post => {
+            title: '',
+            description: '',
+            preview_image: ''
+          }
 
           expect(response).to render_template(:new)
         end

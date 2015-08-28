@@ -1,6 +1,10 @@
 class Post < ActiveRecord::Base
   validates :title, :description, presence: true
   validates :title, length: { maximum: 140 }
+  validates :preview_image, format: {
+    with: /\w+(.png|.gif|.jpg|.gif|.bmp)\z/,
+    message: "url must point to an image"},
+    unless: 'preview_image.empty?'
 
   belongs_to :author
   belongs_to :category
