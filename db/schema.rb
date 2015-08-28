@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822131420) do
+ActiveRecord::Schema.define(version: 20150828181451) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150822131420) do
     t.datetime "created_at",                                                                                              null: false
     t.datetime "updated_at",                                                                                              null: false
     t.text     "social_links",    default: "---\n:google: ''\n:youtube: ''\n:instagram: ''\n:pinterest: ''\n:etsy: ''\n"
+    t.text     "bio"
   end
 
   add_index "authors", ["email"], name: "index_authors_on_email", unique: true

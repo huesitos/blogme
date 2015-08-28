@@ -23,6 +23,18 @@
   %ul.list-inline.tags.text-center
     = render @post.tags
 
+  %section.author-bio
+    .row
+      .col-sm-2
+        = image_tag(@post.author.image, class: 'img-responsive img-rounded')
+      .col-sm-10.small
+        %p.wrap= @post.author.bio
+
+        .contact-info.text-right
+          %strong= "#{@author.name} #{@author.last_name}"
+          %br
+          = @author.email
+
   - if @category_posts
     %section.category-posts
       .row

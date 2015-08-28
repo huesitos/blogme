@@ -98,6 +98,16 @@ p, span, a, li {
   display: none;
 }
 
+.wrap {
+  word-break: break-all;
+  padding-right: 5px;
+}
+
+.quote {
+  padding-left: 20px;
+  border-left: 3px solid $brand-third;
+}
+
 /* --------------------------------------------------------------------
    Both layouts
 -------------------------------------------------------------------- */

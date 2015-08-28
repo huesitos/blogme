@@ -13,11 +13,6 @@
   }
 }
 
-.wrap-content {
-  word-break: break-all;
-  padding-right: 5px;
-}
-
 /* --------------------------------------------------------------------
    Dashboard layout
 -------------------------------------------------------------------- */
@@ -33,7 +28,7 @@
     }
 
     .summary {
-      @extend .wrap-content;
+      @extend .wrap;
     }
 
     .options {
@@ -42,7 +37,6 @@
       }
     }
   }
-
 
   .tags {
     @include simple-filter(tag, #eee)
@@ -111,7 +105,7 @@
     }
 
     .summary {
-      @extend .wrap-content;
+      @extend .wrap;
     }
   }
 
@@ -139,8 +133,7 @@
 
     .comments {
       .comment {
-        padding-left: 20px;
-        border-left: 3px solid $brand-third;
+        @extend .quote;
 
         .text {
           padding-left: 15px;
