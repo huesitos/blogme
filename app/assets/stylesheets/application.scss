@@ -74,6 +74,62 @@ p, span, a, li {
   font-size: 1em;
 }
 
+/* --------------------------------------------------------------------
+   Helper classes
+-------------------------------------------------------------------- */
+
+.inline {
+  display: inline-block;
+}
+
+.light-highlight {
+  color: $brand-third;
+}
+
+.normal-highlight {
+  color: $brand-secondary;
+}
+
+.heavy-highlight {
+  color: $brand-secondary;
+}
+
+.expandable {
+  display: none;
+}
+
+/* --------------------------------------------------------------------
+   Both layouts
+-------------------------------------------------------------------- */
+
+.quick-access-menu {
+  z-index: 999;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+
+  .quick-link {
+    margin-bottom: 5px;
+
+    a {
+      display: inline-block;
+      background-color: $gray-darker;
+      color: white;
+
+      span {
+        padding: 10px;
+      }
+    }
+
+    span.description {
+      display: none;
+      color: black;
+      background-color: $gray-lighter;
+      padding: 8px;
+      vertical-align: text-bottom;
+    }
+  }
+}
 
 /* --------------------------------------------------------------------
    Blog specific
@@ -235,28 +291,4 @@ p, span, a, li {
       width: 30px;
     }
   }
-}
-
-/* --------------------------------------------------------------------
-   Helper classes
--------------------------------------------------------------------- */
-
-.inline {
-  display: inline-block;
-}
-
-.light-highlight {
-  color: $brand-third;
-}
-
-.normal-highlight {
-  color: $brand-secondary;
-}
-
-.heavy-highlight {
-  color: $brand-secondary;
-}
-
-.expandable {
-  display: none;
 }

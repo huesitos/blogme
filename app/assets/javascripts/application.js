@@ -29,4 +29,15 @@ $(document).on('page:ready page:change', function() {
   $('.sidebar-more').click(function() {
     $('.sidebar-content').toggleClass('hidden-xs');
   });
+
+  $('.quick-link').hover(
+    function() {
+      console.log('in');
+      $(this).children('.description').first().css('display', 'inline');
+    },
+    function() {
+      console.log('out');
+      $(this).children('.description').first().css('display', 'none');
+    }
+  );
 });

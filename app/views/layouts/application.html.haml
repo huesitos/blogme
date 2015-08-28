@@ -26,6 +26,31 @@
           - @pages.each do |p|
             %li= link_to p.name, page_path(name: p.name)
 
+    / Dashboard quick access menu
+    - if current_author
+      %ul.quick-access-menu
+        %li.quick-link
+          = link_to dashboard_posts_path do
+            %span.glyphicon.glyphicon-cog
+          %span.description Dashboard
+        %li.quick-link
+          = link_to dashboard_posts_path do
+            %span.glyphicon.glyphicon-user
+          %span.description Authors
+        %li.quick-link
+          = link_to dashboard_categories_path do
+            %span.glyphicon.glyphicon-folder-close
+          %span.description Categories
+        %li.quick-link
+          = link_to new_dashboard_post_path do
+            %span.glyphicon.glyphicon-pencil
+          %span.description New post
+        - if @post
+          %li.quick-link
+            = link_to edit_dashboard_post_path(@post.id) do
+              %span.glyphicon.glyphicon-edit
+            %span.description Edit post
+
     / Content
 
     #content.container

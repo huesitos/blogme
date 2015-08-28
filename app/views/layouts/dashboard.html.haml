@@ -6,13 +6,26 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body{:id => "dashboard", :class => controller.controller_name}
-    / Main navbar
 
     - if current_author
+      / Quick access menu
+      %ul.quick-access-menu
+        %li.quick-link
+          = link_to posts_path do
+            %span.glyphicon.glyphicon-th-large
+          %span.description Blog
+        - if @post
+          %li.quick-link
+            = link_to posts_path do
+              %span.glyphicon.glyphicon-eye-open
+            %span.description See Post in blog
+
+      / Main navbar
+
       .navbar.navbar-default.navbar-fixed-top
         .container
           .navbar-header
-            = link_to 'Blogme', posts_path, class: 'navbar-brand'
+            = link_to 'Blogme', dashboard_posts_path, class: 'navbar-brand'
             %button.navbar-toggle.collapsed{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
               %span.sr-only Toggle navigation
               %span.icon-bar
